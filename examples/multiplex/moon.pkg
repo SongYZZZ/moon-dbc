@@ -1,0 +1,5 @@
+import {
+  "SongYZZZ/moon-dbc" @dbc,
+}
+
+pkgtype(kind: "executable")

@@ -14,3 +14,14 @@ jobs:
       - run: moon test --deny-warn
       - run: moon build
       - run: moon info
+      - run: moon build --target native --release cmd/main
+      - run: moon test --target native --deny-warn
+      - run: moon test --target js --deny-warn
+      - run: moon run examples/basic
+      - run: moon run examples/multiplex
+      - run: moon run --target native cmd/main -- inspect tests/fixtures/basic.dbc
+      - run: moon run --target native cmd/main -- validate tests/fixtures/basic.dbc
+      - run: moon run --target native cmd/main -- decode tests/fixtures/basic.dbc 0x123 E02E030000000000
+      - run: moon run --target native cmd/main -- encode tests/fixtures/basic.dbc 0x123 EngineSpeed=1500 Gear=3
+      - run: moon run --target native cmd/main -- layout tests/fixtures/multiplex.dbc 293
+      - run: moon run --target native cmd/main -- diff tests/fixtures/basic.dbc tests/fixtures/basic.dbc

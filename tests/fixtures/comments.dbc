@@ -1,0 +1,8 @@
+BS_:
+BU_: ECU
+BO_ 1 Comments: 1 ECU
+ SG_ State : 0|8@1+ (1,0) [0|255] "" ECU
+CM_ "中文数据库，UTF-8";
+CM_ BU_ ECU "";
+CM_ BO_ 1 "spaces and \"quotes\"";
+CM_ SG_ 1 State "first line\nsecond line";

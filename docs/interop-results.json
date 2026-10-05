@@ -1,0 +1,1372 @@
+{
+  "date": "2026-10-05",
+  "oracle": "cantools",
+  "version": "44.1.0",
+  "cases": 37,
+  "passed": 37,
+  "rows": [
+    {
+      "fixture": "tests/fixtures/basic.dbc",
+      "input": "E02E030000000000",
+      "dbc_id": 291,
+      "moon": {
+        "message": "EngineData",
+        "dbc_id": 291,
+        "signals": [
+          {
+            "name": "EngineSpeed",
+            "raw": "12000",
+            "physical": 1500,
+            "unit": "rpm",
+            "label": null,
+            "out_of_range": false
+          },
+          {
+            "name": "Gear",
+            "raw": "3",
+            "physical": 3,
+            "unit": "",
+            "label": "Drive",
+            "out_of_range": false
+          }
+        ],
+        "diagnostics": []
+      },
+      "oracle_raw": {
+        "EngineSpeed": 12000,
+        "Gear": 3
+      },
+      "oracle_physical": {
+        "EngineSpeed": 1500.0,
+        "Gear": 3
+      },
+      "moon_encoded": "E02E030000000000",
+      "oracle_encoded": "E02E030000000000",
+      "match": true
+    },
+    {
+      "fixture": "tests/fixtures/basic.dbc",
+      "input": "0000000000000000",
+      "dbc_id": 291,
+      "moon": {
+        "message": "EngineData",
+        "dbc_id": 291,
+        "signals": [
+          {
+            "name": "EngineSpeed",
+            "raw": "0",
+            "physical": 0,
+            "unit": "rpm",
+            "label": null,
+            "out_of_range": false
+          },
+          {
+            "name": "Gear",
+            "raw": "0",
+            "physical": 0,
+            "unit": "",
+            "label": "Park",
+            "out_of_range": false
+          }
+        ],
+        "diagnostics": []
+      },
+      "oracle_raw": {
+        "EngineSpeed": 0,
+        "Gear": 0
+      },
+      "oracle_physical": {
+        "EngineSpeed": 0.0,
+        "Gear": 0
+      },
+      "moon_encoded": "0000000000000000",
+      "oracle_encoded": "0000000000000000",
+      "match": true
+    },
+    {
+      "fixture": "tests/fixtures/basic.dbc",
+      "input": "FFFF070000000000",
+      "dbc_id": 291,
+      "moon": {
+        "message": "EngineData",
+        "dbc_id": 291,
+        "signals": [
+          {
+            "name": "EngineSpeed",
+            "raw": "65535",
+            "physical": 8191.875,
+            "unit": "rpm",
+            "label": null,
+            "out_of_range": true
+          },
+          {
+            "name": "Gear",
+            "raw": "7",
+            "physical": 7,
+            "unit": "",
+            "label": null,
+            "out_of_range": false
+          }
+        ],
+        "diagnostics": [
+          {
+            "code": "codec.decoded_range",
+            "message": "decoded physical value exceeds declared range"
+          }
+        ]
+      },
+      "oracle_raw": {
+        "EngineSpeed": 65535,
+        "Gear": 7
+      },
+      "oracle_physical": {
+        "EngineSpeed": 8191.875,
+        "Gear": 7
+      },
+      "moon_encoded": "FFFF070000000000",
+      "oracle_encoded": "FFFF070000000000",
+      "match": true
+    },
+    {
+      "fixture": "tests/fixtures/motorola.dbc",
+      "input": "0540FFF000000000",
+      "dbc_id": 292,
+      "moon": {
+        "message": "Motorola",
+        "dbc_id": 292,
+        "signals": [
+          {
+            "name": "Unaligned",
+            "raw": "21",
+            "physical": 21,
+            "unit": "",
+            "label": null,
+            "out_of_range": false
+          },
+          {
+            "name": "Signed12",
+            "raw": "-1",
+            "physical": -10.5,
+            "unit": "V",
+            "label": null,
+            "out_of_range": false
+          }
+        ],
+        "diagnostics": []
+      },
+      "oracle_raw": {
+        "Unaligned": 21,
+        "Signed12": -1
+      },
+      "oracle_physical": {
+        "Unaligned": 21,
+        "Signed12": -10.5
+      },
+      "moon_encoded": "0540FFF000000000",
+      "oracle_encoded": "0540FFF000000000",
+      "match": true
+    },
+    {
+      "fixture": "tests/fixtures/motorola.dbc",
+      "input": "0000800000000000",
+      "dbc_id": 292,
+      "moon": {
+        "message": "Motorola",
+        "dbc_id": 292,
+        "signals": [
+          {
+            "name": "Unaligned",
+            "raw": "0",
+            "physical": 0,
+            "unit": "",
+            "label": null,
+            "out_of_range": false
+          },
+          {
+            "name": "Signed12",
+            "raw": "-2048",
+            "physical": -1034,
+            "unit": "V",
+            "label": null,
+            "out_of_range": false
+          }
+        ],
+        "diagnostics": []
+      },
+      "oracle_raw": {
+        "Unaligned": 0,
+        "Signed12": -2048
+      },
+      "oracle_physical": {
+        "Unaligned": 0,
+        "Signed12": -1034.0
+      },
+      "moon_encoded": "0000800000000000",
+      "oracle_encoded": "0000800000000000",
+      "match": true
+    },
+    {
+      "fixture": "tests/fixtures/motorola.dbc",
+      "input": "07C07FF000000000",
+      "dbc_id": 292,
+      "moon": {
+        "message": "Motorola",
+        "dbc_id": 292,
+        "signals": [
+          {
+            "name": "Unaligned",
+            "raw": "31",
+            "physical": 31,
+            "unit": "",
+            "label": null,
+            "out_of_range": false
+          },
+          {
+            "name": "Signed12",
+            "raw": "2047",
+            "physical": 1013.5,
+            "unit": "V",
+            "label": null,
+            "out_of_range": false
+          }
+        ],
+        "diagnostics": []
+      },
+      "oracle_raw": {
+        "Unaligned": 31,
+        "Signed12": 2047
+      },
+      "oracle_physical": {
+        "Unaligned": 31,
+        "Signed12": 1013.5
+      },
+      "moon_encoded": "07C07FF000000000",
+      "oracle_encoded": "07C07FF000000000",
+      "match": true
+    },
+    {
+      "fixture": "tests/fixtures/multiplex.dbc",
+      "input": "0000000B",
+      "dbc_id": 293,
+      "moon": {
+        "message": "Multiplex",
+        "dbc_id": 293,
+        "signals": [
+          {
+            "name": "Mode",
+            "raw": "0",
+            "physical": 0,
+            "unit": "",
+            "label": null,
+            "out_of_range": false
+          },
+          {
+            "name": "Common",
+            "raw": "11",
+            "physical": 11,
+            "unit": "",
+            "label": null,
+            "out_of_range": false
+          },
+          {
+            "name": "Temperature",
+            "raw": "0",
+            "physical": -40,
+            "unit": "degC",
+            "label": null,
+            "out_of_range": false
+          }
+        ],
+        "diagnostics": []
+      },
+      "oracle_raw": {
+        "Mode": 0,
+        "Common": 11,
+        "Temperature": 0
+      },
+      "oracle_physical": {
+        "Mode": 0,
+        "Common": 11,
+        "Temperature": -40.0
+      },
+      "moon_encoded": "0000000B",
+      "oracle_encoded": "0000000B",
+      "match": true
+    },
+    {
+      "fixture": "tests/fixtures/multiplex.dbc",
+      "input": "00FFFF0B",
+      "dbc_id": 293,
+      "moon": {
+        "message": "Multiplex",
+        "dbc_id": 293,
+        "signals": [
+          {
+            "name": "Mode",
+            "raw": "0",
+            "physical": 0,
+            "unit": "",
+            "label": null,
+            "out_of_range": false
+          },
+          {
+            "name": "Common",
+            "raw": "11",
+            "physical": 11,
+            "unit": "",
+            "label": null,
+            "out_of_range": false
+          },
+          {
+            "name": "Temperature",
+            "raw": "-1",
+            "physical": -40.1,
+            "unit": "degC",
+            "label": null,
+            "out_of_range": false
+          }
+        ],
+        "diagnostics": []
+      },
+      "oracle_raw": {
+        "Mode": 0,
+        "Common": 11,
+        "Temperature": -1
+      },
+      "oracle_physical": {
+        "Mode": 0,
+        "Common": 11,
+        "Temperature": -40.1
+      },
+      "moon_encoded": "00FFFF0B",
+      "oracle_encoded": "00FFFF0B",
+      "match": true
+    },
+    {
+      "fixture": "tests/fixtures/multiplex.dbc",
+      "input": "0134120B",
+      "dbc_id": 293,
+      "moon": {
+        "message": "Multiplex",
+        "dbc_id": 293,
+        "signals": [
+          {
+            "name": "Mode",
+            "raw": "1",
+            "physical": 1,
+            "unit": "",
+            "label": null,
+            "out_of_range": false
+          },
+          {
+            "name": "Common",
+            "raw": "11",
+            "physical": 11,
+            "unit": "",
+            "label": null,
+            "out_of_range": false
+          },
+          {
+            "name": "Voltage",
+            "raw": "4660",
+            "physical": 46.6,
+            "unit": "V",
+            "label": null,
+            "out_of_range": false
+          }
+        ],
+        "diagnostics": []
+      },
+      "oracle_raw": {
+        "Mode": 1,
+        "Common": 11,
+        "Voltage": 4660
+      },
+      "oracle_physical": {
+        "Mode": 1,
+        "Common": 11,
+        "Voltage": 46.6
+      },
+      "moon_encoded": "0134120B",
+      "oracle_encoded": "0134120B",
+      "match": true
+    },
+    {
+      "fixture": "tests/fixtures/multiplex.dbc",
+      "input": "0234120B",
+      "dbc_id": 293,
+      "moon": {
+        "message": "Multiplex",
+        "dbc_id": 293,
+        "signals": [
+          {
+            "name": "Mode",
+            "raw": "2",
+            "physical": 2,
+            "unit": "",
+            "label": null,
+            "out_of_range": false
+          },
+          {
+            "name": "Common",
+            "raw": "11",
+            "physical": 11,
+            "unit": "",
+            "label": null,
+            "out_of_range": false
+          },
+          {
+            "name": "Counter",
+            "raw": "4660",
+            "physical": 4660,
+            "unit": "",
+            "label": null,
+            "out_of_range": false
+          }
+        ],
+        "diagnostics": []
+      },
+      "oracle_raw": {
+        "Mode": 2,
+        "Common": 11,
+        "Counter": 4660
+      },
+      "oracle_physical": {
+        "Mode": 2,
+        "Common": 11,
+        "Counter": 4660
+      },
+      "moon_encoded": "0234120B",
+      "oracle_encoded": "0234120B",
+      "match": true
+    },
+    {
+      "fixture": "tests/fixtures/canfd.dbc",
+      "input": "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF",
+      "dbc_id": 2147483942,
+      "moon": {
+        "message": "CANFD",
+        "dbc_id": 2147483942,
+        "signals": [
+          {
+            "name": "Tail",
+            "raw": "255",
+            "physical": 255,
+            "unit": "",
+            "label": null,
+            "out_of_range": false
+          },
+          {
+            "name": "FullUnsigned",
+            "raw": "18446744073709551615",
+            "physical": 18446744073709552000,
+            "unit": "",
+            "label": null,
+            "out_of_range": false
+          }
+        ],
+        "diagnostics": []
+      },
+      "oracle_raw": {
+        "FullUnsigned": 18446744073709551615,
+        "Tail": 255
+      },
+      "oracle_physical": {
+        "FullUnsigned": 18446744073709551615,
+        "Tail": 255
+      },
+      "moon_encoded": "FFFFFFFFFFFFFFFF00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000FF",
+      "oracle_encoded": "FFFFFFFFFFFFFFFF00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000FF",
+      "match": true
+    },
+    {
+      "fixture": "tests/fixtures/canfd.dbc",
+      "input": "000000000000008000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000A5",
+      "dbc_id": 2147483942,
+      "moon": {
+        "message": "CANFD",
+        "dbc_id": 2147483942,
+        "signals": [
+          {
+            "name": "Tail",
+            "raw": "165",
+            "physical": 165,
+            "unit": "",
+            "label": null,
+            "out_of_range": false
+          },
+          {
+            "name": "FullUnsigned",
+            "raw": "9223372036854775808",
+            "physical": 9223372036854776000,
+            "unit": "",
+            "label": null,
+            "out_of_range": false
+          }
+        ],
+        "diagnostics": []
+      },
+      "oracle_raw": {
+        "FullUnsigned": 9223372036854775808,
+        "Tail": 165
+      },
+      "oracle_physical": {
+        "FullUnsigned": 9223372036854775808,
+        "Tail": 165
+      },
+      "moon_encoded": "000000000000008000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000A5",
+      "oracle_encoded": "000000000000008000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000A5",
+      "match": true
+    },
+    {
+      "fixture": "tests/fixtures/motorola.dbc",
+      "input": "0000800000000000",
+      "oracle_raw": {
+        "Unaligned": 0,
+        "Signed12": -2048
+      },
+      "moon": {
+        "message": "Motorola",
+        "dbc_id": 292,
+        "signals": [
+          {
+            "name": "Unaligned",
+            "raw": "0",
+            "physical": 0,
+            "unit": "",
+            "label": null,
+            "out_of_range": false
+          },
+          {
+            "name": "Signed12",
+            "raw": "-2048",
+            "physical": -1034,
+            "unit": "V",
+            "label": null,
+            "out_of_range": false
+          }
+        ],
+        "diagnostics": []
+      },
+      "moon_encoded": "0000800000000000",
+      "oracle_encoded": "0000800000000000",
+      "match": true
+    },
+    {
+      "fixture": "tests/fixtures/motorola.dbc",
+      "input": "0000FFF000000000",
+      "oracle_raw": {
+        "Unaligned": 0,
+        "Signed12": -1
+      },
+      "moon": {
+        "message": "Motorola",
+        "dbc_id": 292,
+        "signals": [
+          {
+            "name": "Unaligned",
+            "raw": "0",
+            "physical": 0,
+            "unit": "",
+            "label": null,
+            "out_of_range": false
+          },
+          {
+            "name": "Signed12",
+            "raw": "-1",
+            "physical": -10.5,
+            "unit": "V",
+            "label": null,
+            "out_of_range": false
+          }
+        ],
+        "diagnostics": []
+      },
+      "moon_encoded": "0000FFF000000000",
+      "oracle_encoded": "0000FFF000000000",
+      "match": true
+    },
+    {
+      "fixture": "tests/fixtures/motorola.dbc",
+      "input": "0000000000000000",
+      "oracle_raw": {
+        "Unaligned": 0,
+        "Signed12": 0
+      },
+      "moon": {
+        "message": "Motorola",
+        "dbc_id": 292,
+        "signals": [
+          {
+            "name": "Unaligned",
+            "raw": "0",
+            "physical": 0,
+            "unit": "",
+            "label": null,
+            "out_of_range": false
+          },
+          {
+            "name": "Signed12",
+            "raw": "0",
+            "physical": -10,
+            "unit": "V",
+            "label": null,
+            "out_of_range": false
+          }
+        ],
+        "diagnostics": []
+      },
+      "moon_encoded": "0000000000000000",
+      "oracle_encoded": "0000000000000000",
+      "match": true
+    },
+    {
+      "fixture": "tests/fixtures/motorola.dbc",
+      "input": "0000001000000000",
+      "oracle_raw": {
+        "Unaligned": 0,
+        "Signed12": 1
+      },
+      "moon": {
+        "message": "Motorola",
+        "dbc_id": 292,
+        "signals": [
+          {
+            "name": "Unaligned",
+            "raw": "0",
+            "physical": 0,
+            "unit": "",
+            "label": null,
+            "out_of_range": false
+          },
+          {
+            "name": "Signed12",
+            "raw": "1",
+            "physical": -9.5,
+            "unit": "V",
+            "label": null,
+            "out_of_range": false
+          }
+        ],
+        "diagnostics": []
+      },
+      "moon_encoded": "0000001000000000",
+      "oracle_encoded": "0000001000000000",
+      "match": true
+    },
+    {
+      "fixture": "tests/fixtures/motorola.dbc",
+      "input": "00007FF000000000",
+      "oracle_raw": {
+        "Unaligned": 0,
+        "Signed12": 2047
+      },
+      "moon": {
+        "message": "Motorola",
+        "dbc_id": 292,
+        "signals": [
+          {
+            "name": "Unaligned",
+            "raw": "0",
+            "physical": 0,
+            "unit": "",
+            "label": null,
+            "out_of_range": false
+          },
+          {
+            "name": "Signed12",
+            "raw": "2047",
+            "physical": 1013.5,
+            "unit": "V",
+            "label": null,
+            "out_of_range": false
+          }
+        ],
+        "diagnostics": []
+      },
+      "moon_encoded": "00007FF000000000",
+      "oracle_encoded": "00007FF000000000",
+      "match": true
+    },
+    {
+      "fixture": "tests/fixtures/motorola.dbc",
+      "input": "0040800000000000",
+      "oracle_raw": {
+        "Unaligned": 1,
+        "Signed12": -2048
+      },
+      "moon": {
+        "message": "Motorola",
+        "dbc_id": 292,
+        "signals": [
+          {
+            "name": "Unaligned",
+            "raw": "1",
+            "physical": 1,
+            "unit": "",
+            "label": null,
+            "out_of_range": false
+          },
+          {
+            "name": "Signed12",
+            "raw": "-2048",
+            "physical": -1034,
+            "unit": "V",
+            "label": null,
+            "out_of_range": false
+          }
+        ],
+        "diagnostics": []
+      },
+      "moon_encoded": "0040800000000000",
+      "oracle_encoded": "0040800000000000",
+      "match": true
+    },
+    {
+      "fixture": "tests/fixtures/motorola.dbc",
+      "input": "0040FFF000000000",
+      "oracle_raw": {
+        "Unaligned": 1,
+        "Signed12": -1
+      },
+      "moon": {
+        "message": "Motorola",
+        "dbc_id": 292,
+        "signals": [
+          {
+            "name": "Unaligned",
+            "raw": "1",
+            "physical": 1,
+            "unit": "",
+            "label": null,
+            "out_of_range": false
+          },
+          {
+            "name": "Signed12",
+            "raw": "-1",
+            "physical": -10.5,
+            "unit": "V",
+            "label": null,
+            "out_of_range": false
+          }
+        ],
+        "diagnostics": []
+      },
+      "moon_encoded": "0040FFF000000000",
+      "oracle_encoded": "0040FFF000000000",
+      "match": true
+    },
+    {
+      "fixture": "tests/fixtures/motorola.dbc",
+      "input": "0040000000000000",
+      "oracle_raw": {
+        "Unaligned": 1,
+        "Signed12": 0
+      },
+      "moon": {
+        "message": "Motorola",
+        "dbc_id": 292,
+        "signals": [
+          {
+            "name": "Unaligned",
+            "raw": "1",
+            "physical": 1,
+            "unit": "",
+            "label": null,
+            "out_of_range": false
+          },
+          {
+            "name": "Signed12",
+            "raw": "0",
+            "physical": -10,
+            "unit": "V",
+            "label": null,
+            "out_of_range": false
+          }
+        ],
+        "diagnostics": []
+      },
+      "moon_encoded": "0040000000000000",
+      "oracle_encoded": "0040000000000000",
+      "match": true
+    },
+    {
+      "fixture": "tests/fixtures/motorola.dbc",
+      "input": "0040001000000000",
+      "oracle_raw": {
+        "Unaligned": 1,
+        "Signed12": 1
+      },
+      "moon": {
+        "message": "Motorola",
+        "dbc_id": 292,
+        "signals": [
+          {
+            "name": "Unaligned",
+            "raw": "1",
+            "physical": 1,
+            "unit": "",
+            "label": null,
+            "out_of_range": false
+          },
+          {
+            "name": "Signed12",
+            "raw": "1",
+            "physical": -9.5,
+            "unit": "V",
+            "label": null,
+            "out_of_range": false
+          }
+        ],
+        "diagnostics": []
+      },
+      "moon_encoded": "0040001000000000",
+      "oracle_encoded": "0040001000000000",
+      "match": true
+    },
+    {
+      "fixture": "tests/fixtures/motorola.dbc",
+      "input": "00407FF000000000",
+      "oracle_raw": {
+        "Unaligned": 1,
+        "Signed12": 2047
+      },
+      "moon": {
+        "message": "Motorola",
+        "dbc_id": 292,
+        "signals": [
+          {
+            "name": "Unaligned",
+            "raw": "1",
+            "physical": 1,
+            "unit": "",
+            "label": null,
+            "out_of_range": false
+          },
+          {
+            "name": "Signed12",
+            "raw": "2047",
+            "physical": 1013.5,
+            "unit": "V",
+            "label": null,
+            "out_of_range": false
+          }
+        ],
+        "diagnostics": []
+      },
+      "moon_encoded": "00407FF000000000",
+      "oracle_encoded": "00407FF000000000",
+      "match": true
+    },
+    {
+      "fixture": "tests/fixtures/motorola.dbc",
+      "input": "03C0800000000000",
+      "oracle_raw": {
+        "Unaligned": 15,
+        "Signed12": -2048
+      },
+      "moon": {
+        "message": "Motorola",
+        "dbc_id": 292,
+        "signals": [
+          {
+            "name": "Unaligned",
+            "raw": "15",
+            "physical": 15,
+            "unit": "",
+            "label": null,
+            "out_of_range": false
+          },
+          {
+            "name": "Signed12",
+            "raw": "-2048",
+            "physical": -1034,
+            "unit": "V",
+            "label": null,
+            "out_of_range": false
+          }
+        ],
+        "diagnostics": []
+      },
+      "moon_encoded": "03C0800000000000",
+      "oracle_encoded": "03C0800000000000",
+      "match": true
+    },
+    {
+      "fixture": "tests/fixtures/motorola.dbc",
+      "input": "03C0FFF000000000",
+      "oracle_raw": {
+        "Unaligned": 15,
+        "Signed12": -1
+      },
+      "moon": {
+        "message": "Motorola",
+        "dbc_id": 292,
+        "signals": [
+          {
+            "name": "Unaligned",
+            "raw": "15",
+            "physical": 15,
+            "unit": "",
+            "label": null,
+            "out_of_range": false
+          },
+          {
+            "name": "Signed12",
+            "raw": "-1",
+            "physical": -10.5,
+            "unit": "V",
+            "label": null,
+            "out_of_range": false
+          }
+        ],
+        "diagnostics": []
+      },
+      "moon_encoded": "03C0FFF000000000",
+      "oracle_encoded": "03C0FFF000000000",
+      "match": true
+    },
+    {
+      "fixture": "tests/fixtures/motorola.dbc",
+      "input": "03C0000000000000",
+      "oracle_raw": {
+        "Unaligned": 15,
+        "Signed12": 0
+      },
+      "moon": {
+        "message": "Motorola",
+        "dbc_id": 292,
+        "signals": [
+          {
+            "name": "Unaligned",
+            "raw": "15",
+            "physical": 15,
+            "unit": "",
+            "label": null,
+            "out_of_range": false
+          },
+          {
+            "name": "Signed12",
+            "raw": "0",
+            "physical": -10,
+            "unit": "V",
+            "label": null,
+            "out_of_range": false
+          }
+        ],
+        "diagnostics": []
+      },
+      "moon_encoded": "03C0000000000000",
+      "oracle_encoded": "03C0000000000000",
+      "match": true
+    },
+    {
+      "fixture": "tests/fixtures/motorola.dbc",
+      "input": "03C0001000000000",
+      "oracle_raw": {
+        "Unaligned": 15,
+        "Signed12": 1
+      },
+      "moon": {
+        "message": "Motorola",
+        "dbc_id": 292,
+        "signals": [
+          {
+            "name": "Unaligned",
+            "raw": "15",
+            "physical": 15,
+            "unit": "",
+            "label": null,
+            "out_of_range": false
+          },
+          {
+            "name": "Signed12",
+            "raw": "1",
+            "physical": -9.5,
+            "unit": "V",
+            "label": null,
+            "out_of_range": false
+          }
+        ],
+        "diagnostics": []
+      },
+      "moon_encoded": "03C0001000000000",
+      "oracle_encoded": "03C0001000000000",
+      "match": true
+    },
+    {
+      "fixture": "tests/fixtures/motorola.dbc",
+      "input": "03C07FF000000000",
+      "oracle_raw": {
+        "Unaligned": 15,
+        "Signed12": 2047
+      },
+      "moon": {
+        "message": "Motorola",
+        "dbc_id": 292,
+        "signals": [
+          {
+            "name": "Unaligned",
+            "raw": "15",
+            "physical": 15,
+            "unit": "",
+            "label": null,
+            "out_of_range": false
+          },
+          {
+            "name": "Signed12",
+            "raw": "2047",
+            "physical": 1013.5,
+            "unit": "V",
+            "label": null,
+            "out_of_range": false
+          }
+        ],
+        "diagnostics": []
+      },
+      "moon_encoded": "03C07FF000000000",
+      "oracle_encoded": "03C07FF000000000",
+      "match": true
+    },
+    {
+      "fixture": "tests/fixtures/motorola.dbc",
+      "input": "0400800000000000",
+      "oracle_raw": {
+        "Unaligned": 16,
+        "Signed12": -2048
+      },
+      "moon": {
+        "message": "Motorola",
+        "dbc_id": 292,
+        "signals": [
+          {
+            "name": "Unaligned",
+            "raw": "16",
+            "physical": 16,
+            "unit": "",
+            "label": null,
+            "out_of_range": false
+          },
+          {
+            "name": "Signed12",
+            "raw": "-2048",
+            "physical": -1034,
+            "unit": "V",
+            "label": null,
+            "out_of_range": false
+          }
+        ],
+        "diagnostics": []
+      },
+      "moon_encoded": "0400800000000000",
+      "oracle_encoded": "0400800000000000",
+      "match": true
+    },
+    {
+      "fixture": "tests/fixtures/motorola.dbc",
+      "input": "0400FFF000000000",
+      "oracle_raw": {
+        "Unaligned": 16,
+        "Signed12": -1
+      },
+      "moon": {
+        "message": "Motorola",
+        "dbc_id": 292,
+        "signals": [
+          {
+            "name": "Unaligned",
+            "raw": "16",
+            "physical": 16,
+            "unit": "",
+            "label": null,
+            "out_of_range": false
+          },
+          {
+            "name": "Signed12",
+            "raw": "-1",
+            "physical": -10.5,
+            "unit": "V",
+            "label": null,
+            "out_of_range": false
+          }
+        ],
+        "diagnostics": []
+      },
+      "moon_encoded": "0400FFF000000000",
+      "oracle_encoded": "0400FFF000000000",
+      "match": true
+    },
+    {
+      "fixture": "tests/fixtures/motorola.dbc",
+      "input": "0400000000000000",
+      "oracle_raw": {
+        "Unaligned": 16,
+        "Signed12": 0
+      },
+      "moon": {
+        "message": "Motorola",
+        "dbc_id": 292,
+        "signals": [
+          {
+            "name": "Unaligned",
+            "raw": "16",
+            "physical": 16,
+            "unit": "",
+            "label": null,
+            "out_of_range": false
+          },
+          {
+            "name": "Signed12",
+            "raw": "0",
+            "physical": -10,
+            "unit": "V",
+            "label": null,
+            "out_of_range": false
+          }
+        ],
+        "diagnostics": []
+      },
+      "moon_encoded": "0400000000000000",
+      "oracle_encoded": "0400000000000000",
+      "match": true
+    },
+    {
+      "fixture": "tests/fixtures/motorola.dbc",
+      "input": "0400001000000000",
+      "oracle_raw": {
+        "Unaligned": 16,
+        "Signed12": 1
+      },
+      "moon": {
+        "message": "Motorola",
+        "dbc_id": 292,
+        "signals": [
+          {
+            "name": "Unaligned",
+            "raw": "16",
+            "physical": 16,
+            "unit": "",
+            "label": null,
+            "out_of_range": false
+          },
+          {
+            "name": "Signed12",
+            "raw": "1",
+            "physical": -9.5,
+            "unit": "V",
+            "label": null,
+            "out_of_range": false
+          }
+        ],
+        "diagnostics": []
+      },
+      "moon_encoded": "0400001000000000",
+      "oracle_encoded": "0400001000000000",
+      "match": true
+    },
+    {
+      "fixture": "tests/fixtures/motorola.dbc",
+      "input": "04007FF000000000",
+      "oracle_raw": {
+        "Unaligned": 16,
+        "Signed12": 2047
+      },
+      "moon": {
+        "message": "Motorola",
+        "dbc_id": 292,
+        "signals": [
+          {
+            "name": "Unaligned",
+            "raw": "16",
+            "physical": 16,
+            "unit": "",
+            "label": null,
+            "out_of_range": false
+          },
+          {
+            "name": "Signed12",
+            "raw": "2047",
+            "physical": 1013.5,
+            "unit": "V",
+            "label": null,
+            "out_of_range": false
+          }
+        ],
+        "diagnostics": []
+      },
+      "moon_encoded": "04007FF000000000",
+      "oracle_encoded": "04007FF000000000",
+      "match": true
+    },
+    {
+      "fixture": "tests/fixtures/motorola.dbc",
+      "input": "07C0800000000000",
+      "oracle_raw": {
+        "Unaligned": 31,
+        "Signed12": -2048
+      },
+      "moon": {
+        "message": "Motorola",
+        "dbc_id": 292,
+        "signals": [
+          {
+            "name": "Unaligned",
+            "raw": "31",
+            "physical": 31,
+            "unit": "",
+            "label": null,
+            "out_of_range": false
+          },
+          {
+            "name": "Signed12",
+            "raw": "-2048",
+            "physical": -1034,
+            "unit": "V",
+            "label": null,
+            "out_of_range": false
+          }
+        ],
+        "diagnostics": []
+      },
+      "moon_encoded": "07C0800000000000",
+      "oracle_encoded": "07C0800000000000",
+      "match": true
+    },
+    {
+      "fixture": "tests/fixtures/motorola.dbc",
+      "input": "07C0FFF000000000",
+      "oracle_raw": {
+        "Unaligned": 31,
+        "Signed12": -1
+      },
+      "moon": {
+        "message": "Motorola",
+        "dbc_id": 292,
+        "signals": [
+          {
+            "name": "Unaligned",
+            "raw": "31",
+            "physical": 31,
+            "unit": "",
+            "label": null,
+            "out_of_range": false
+          },
+          {
+            "name": "Signed12",
+            "raw": "-1",
+            "physical": -10.5,
+            "unit": "V",
+            "label": null,
+            "out_of_range": false
+          }
+        ],
+        "diagnostics": []
+      },
+      "moon_encoded": "07C0FFF000000000",
+      "oracle_encoded": "07C0FFF000000000",
+      "match": true
+    },
+    {
+      "fixture": "tests/fixtures/motorola.dbc",
+      "input": "07C0000000000000",
+      "oracle_raw": {
+        "Unaligned": 31,
+        "Signed12": 0
+      },
+      "moon": {
+        "message": "Motorola",
+        "dbc_id": 292,
+        "signals": [
+          {
+            "name": "Unaligned",
+            "raw": "31",
+            "physical": 31,
+            "unit": "",
+            "label": null,
+            "out_of_range": false
+          },
+          {
+            "name": "Signed12",
+            "raw": "0",
+            "physical": -10,
+            "unit": "V",
+            "label": null,
+            "out_of_range": false
+          }
+        ],
+        "diagnostics": []
+      },
+      "moon_encoded": "07C0000000000000",
+      "oracle_encoded": "07C0000000000000",
+      "match": true
+    },
+    {
+      "fixture": "tests/fixtures/motorola.dbc",
+      "input": "07C0001000000000",
+      "oracle_raw": {
+        "Unaligned": 31,
+        "Signed12": 1
+      },
+      "moon": {
+        "message": "Motorola",
+        "dbc_id": 292,
+        "signals": [
+          {
+            "name": "Unaligned",
+            "raw": "31",
+            "physical": 31,
+            "unit": "",
+            "label": null,
+            "out_of_range": false
+          },
+          {
+            "name": "Signed12",
+            "raw": "1",
+            "physical": -9.5,
+            "unit": "V",
+            "label": null,
+            "out_of_range": false
+          }
+        ],
+        "diagnostics": []
+      },
+      "moon_encoded": "07C0001000000000",
+      "oracle_encoded": "07C0001000000000",
+      "match": true
+    },
+    {
+      "fixture": "tests/fixtures/motorola.dbc",
+      "input": "07C07FF000000000",
+      "oracle_raw": {
+        "Unaligned": 31,
+        "Signed12": 2047
+      },
+      "moon": {
+        "message": "Motorola",
+        "dbc_id": 292,
+        "signals": [
+          {
+            "name": "Unaligned",
+            "raw": "31",
+            "physical": 31,
+            "unit": "",
+            "label": null,
+            "out_of_range": false
+          },
+          {
+            "name": "Signed12",
+            "raw": "2047",
+            "physical": 1013.5,
+            "unit": "V",
+            "label": null,
+            "out_of_range": false
+          }
+        ],
+        "diagnostics": []
+      },
+      "moon_encoded": "07C07FF000000000",
+      "oracle_encoded": "07C07FF000000000",
+      "match": true
+    }
+  ]
+}

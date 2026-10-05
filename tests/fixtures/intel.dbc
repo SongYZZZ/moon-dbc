@@ -1,0 +1,6 @@
+BS_:
+BU_: ECU
+BO_ 1 Intel: 8 ECU
+ SG_ Tiny : 0|1@1+ (1,0) [0|1] "" ECU
+ SG_ Unaligned : 2|9@1+ (1,0) [0|511] "" ECU
+ SG_ Wide : 16|32@1+ (1,0) [0|4294967295] "" ECU

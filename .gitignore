@@ -6,3 +6,4 @@ target
 .moonagent/
 .oracle/
 .verification/
+dist/

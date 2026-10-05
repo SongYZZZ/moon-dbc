@@ -1,0 +1,5 @@
+BS_:
+BU_: ECU
+BO_ 1 Values: 1 ECU
+ SG_ State : 0|2@1+ (1,0) [0|3] "" ECU
+VAL_ 1 State 0 "Off" 1 "On" 2 "Error";

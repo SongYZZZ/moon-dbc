@@ -1,0 +1,362 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "SongYZZZ/moon-dbc"
+
+import {
+  "moonbitlang/core/debug",
+}
+
+// Values
+pub fn cli_help() -> String
+
+pub fn compile_message(Message) -> CompiledMessage raise DbcError
+
+pub fn decode_frame(Database, CanFrame) -> DecodedMessage raise DbcError
+
+pub fn decode_signal_raw(Signal, Array[Byte]) -> RawValue raise DbcError
+
+pub fn diff_database(Database, Database) -> Array[Change]
+
+pub fn encode_message(Message, Array[SignalAssignment], range_policy? : RangePolicy) -> EncodedMessage raise DbcError
+
+pub fn encode_signal_raw(Signal, Array[Byte], RawValue) -> Unit raise DbcError
+
+pub fn execute_cli(Command, String, second_source? : String) -> CliOutput raise DbcError
+
+pub fn frame_hex(Array[Byte]) -> String
+
+pub fn frame_id_from_dbc(UInt) -> FrameId raise DbcError
+
+pub fn inspect_database(Database) -> DatabaseStats
+
+pub fn message_layout(Message) -> Array[BitCell] raise DbcError
+
+pub fn parse_cli_arguments(Array[String]) -> Command raise DbcError
+
+pub fn parse_dbc(String) -> Database raise DbcError
+
+pub fn parse_dbc_with_options(String, ParseOptions) -> Database raise DbcError
+
+pub fn parse_frame_hex(String) -> Array[Byte] raise DbcError
+
+pub fn physical_to_raw(Signal, Double, range_policy? : RangePolicy) -> RawValue raise DbcError
+
+pub fn raw_to_physical(Signal, RawValue) -> Double raise DbcError
+
+pub fn render_diagnostic(Diagnostic) -> String
+
+pub fn render_layout(Message) -> String raise DbcError
+
+pub fn signal_bits(Signal, Int) -> Array[Int] raise DbcError
+
+pub fn signal_overlap(Signal, Signal, Int) -> Array[Int] raise DbcError
+
+pub fn validate_database(Database) -> Array[Diagnostic]
+
+pub fn write_dbc(Database) -> String raise DbcError
+
+// Errors
+pub suberror DbcError {
+  Failure(Diagnostic)
+} derive(@debug.Debug)
+
+// Types and methods
+pub(all) struct Attribute {
+  name : String
+  target : ObjectRef?
+  value : AttributeValue
+  location : SourceLocation
+} derive(Eq, @debug.Debug)
+
+pub(all) struct AttributeDefinition {
+  name : String
+  scope : Scope
+  kind : AttributeType
+  location : SourceLocation
+} derive(Eq, @debug.Debug)
+
+pub(all) enum AttributeType {
+  IntType(Int64, Int64)
+  HexType(Int64, Int64)
+  FloatType(Double, Double)
+  StringType
+  EnumType(Array[String])
+} derive(Eq, @debug.Debug)
+
+pub(all) enum AttributeValue {
+  Integer(Int64)
+  Real(Double)
+  Text(String)
+} derive(Eq, @debug.Debug)
+
+pub(all) struct BitCell {
+  position : Int
+  owners : Array[String]
+} derive(Eq, @debug.Debug)
+
+pub(all) enum ByteOrder {
+  Intel
+  Motorola
+} derive(Eq, @debug.Debug)
+
+pub(all) struct CanFrame {
+  frame_id : FrameId
+  payload : Array[Byte]
+} derive(Eq, @debug.Debug)
+
+pub(all) struct Change {
+  kind : ChangeKind
+  message_id : UInt?
+  message_name : String?
+  signal_name : String?
+  field : String
+  before : String
+  after : String
+  breaking : Bool
+} derive(Eq, @debug.Debug)
+
+pub(all) enum ChangeKind {
+  Added
+  Removed
+  Changed
+} derive(Eq, @debug.Debug)
+
+pub(all) struct CliOutput {
+  text : String
+  exit_code : Int
+} derive(Eq, @debug.Debug)
+
+pub(all) struct Command {
+  kind : CommandKind
+  path : String
+  second_path : String?
+  message_id : UInt?
+  hex : String
+  assignments : Array[String]
+  raw : Bool
+  permissive : Bool
+  json : Bool
+} derive(Eq, @debug.Debug)
+
+pub(all) enum CommandKind {
+  Help
+  VersionCommand
+  Inspect
+  Validate
+  Decode
+  Encode
+  Diff
+  Layout
+  Normalize
+} derive(Eq, @debug.Debug)
+
+pub(all) struct Comment {
+  target : ObjectRef
+  text : String
+  location : SourceLocation
+} derive(Eq, @debug.Debug)
+
+pub struct CompiledMessage {
+  message : Message
+  positions : Array[Array[Int]]
+  selector : Int?
+}
+pub fn CompiledMessage::decode(Self, CanFrame) -> DecodedMessage raise DbcError
+pub fn CompiledMessage::encode(Self, Array[SignalAssignment], range_policy? : RangePolicy) -> EncodedMessage raise DbcError
+
+pub(all) struct Database {
+  mut version : String
+  nodes : Array[Node]
+  messages : Array[Message]
+  comments : Array[Comment]
+  attribute_definitions : Array[AttributeDefinition]
+  attributes : Array[Attribute]
+  unsupported : Array[UnsupportedStatement]
+  diagnostics : Array[Diagnostic]
+}
+pub fn Database::attribute_value(Self, String, ObjectRef) -> AttributeValue?
+pub fn Database::find_signals(Self, String) -> Array[(Message, Signal)]
+pub fn Database::message_by_id(Self, FrameId) -> Message?
+pub fn Database::message_by_name(Self, String) -> Message?
+pub fn Database::new() -> Self
+pub fn Database::node_by_name(Self, String) -> Node?
+
+pub(all) struct DatabaseStats {
+  nodes : Int
+  messages : Int
+  signals : Int
+  standard_messages : Int
+  extended_messages : Int
+  classic_sized_messages : Int
+  fd_sized_messages : Int
+  multiplexed_messages : Int
+  value_descriptions : Int
+  errors : Int
+  warnings : Int
+} derive(Eq, @debug.Debug)
+
+pub(all) struct DecodedMessage {
+  name : String
+  frame_id : FrameId
+  signals : Array[DecodedSignal]
+  diagnostics : Array[Diagnostic]
+} derive(Eq, @debug.Debug)
+
+pub(all) struct DecodedSignal {
+  name : String
+  raw : RawValue
+  physical : Double
+  unit : String
+  label : String?
+  out_of_range : Bool
+} derive(Eq, @debug.Debug)
+
+pub(all) struct Diagnostic {
+  severity : Severity
+  code : String
+  message : String
+  location : SourceLocation
+  message_name : String?
+  signal_name : String?
+} derive(Eq, @debug.Debug)
+
+pub(all) struct EncodedMessage {
+  frame : CanFrame
+  diagnostics : Array[Diagnostic]
+} derive(Eq, @debug.Debug)
+
+pub(all) struct FrameId {
+  id : UInt
+  extended : Bool
+} derive(Eq, @debug.Debug)
+pub fn FrameId::new(UInt, extended? : Bool) -> Self raise DbcError
+pub fn FrameId::to_dbc(Self) -> UInt
+
+pub(all) struct Message {
+  raw_dbc_id : UInt
+  frame_id : FrameId
+  name : String
+  length : Int
+  transmitter : String
+  signals : Array[Signal]
+  location : SourceLocation
+} derive(Eq, @debug.Debug)
+pub fn Message::new(FrameId, String, Int, transmitter? : String, signals? : Array[Signal]) -> Self
+pub fn Message::signal_by_name(Self, String) -> Signal?
+
+pub(all) enum MultiplexInfo {
+  Always
+  Multiplexer
+  Branch(Int64)
+} derive(Eq, @debug.Debug)
+
+pub(all) struct Node {
+  name : String
+  location : SourceLocation
+} derive(Eq, @debug.Debug)
+
+pub(all) enum ObjectRef {
+  DatabaseRef
+  NodeRef(String)
+  MessageRef(UInt)
+  SignalRef(UInt, String)
+} derive(Eq, Hash, @debug.Debug)
+
+pub(all) struct ParseLimits {
+  max_file_size : Int
+  max_line_length : Int
+  max_token_length : Int
+  max_name_length : Int
+  max_messages : Int
+  max_signals_per_message : Int
+  max_total_signals : Int
+  max_attribute_size : Int
+  max_nodes : Int
+  max_tokens : Int
+  max_metadata_records : Int
+} derive(Eq, @debug.Debug)
+pub fn ParseLimits::default() -> Self
+
+pub(all) enum ParseMode {
+  Strict
+  Permissive
+} derive(Eq, @debug.Debug)
+
+pub(all) struct ParseOptions {
+  mode : ParseMode
+  limits : ParseLimits
+} derive(Eq, @debug.Debug)
+pub fn ParseOptions::default() -> Self
+
+pub(all) enum RangePolicy {
+  Ignore
+  Warn
+  Reject
+  Clamp
+} derive(Eq, @debug.Debug)
+
+pub(all) enum RawValue {
+  Unsigned(UInt64)
+  Signed(Int64)
+} derive(Eq, @debug.Debug)
+
+pub(all) enum Scope {
+  DatabaseScope
+  NodeScope
+  MessageScope
+  SignalScope
+} derive(Eq, @debug.Debug)
+
+pub(all) enum Severity {
+  Error
+  Warning
+} derive(Eq, @debug.Debug)
+
+pub(all) struct Signal {
+  name : String
+  start_bit : Int
+  bit_length : Int
+  byte_order : ByteOrder
+  signed : Bool
+  factor : Double
+  offset : Double
+  minimum : Double
+  maximum : Double
+  unit : String
+  receivers : Array[String]
+  multiplex : MultiplexInfo
+  values : Array[ValueDescription]
+  location : SourceLocation
+} derive(Eq, @debug.Debug)
+pub fn Signal::new(String, Int, Int, byte_order? : ByteOrder, signed? : Bool, factor? : Double, offset? : Double, minimum? : Double, maximum? : Double, unit? : String, receivers? : Array[String], multiplex? : MultiplexInfo) -> Self
+
+pub(all) struct SignalAssignment {
+  name : String
+  value : SignalValue
+} derive(Eq, @debug.Debug)
+
+pub(all) enum SignalValue {
+  Physical(Double)
+  Raw(RawValue)
+  Label(String)
+} derive(Eq, @debug.Debug)
+
+pub(all) struct SourceLocation {
+  line : Int
+  column : Int
+  offset : Int
+} derive(Eq, @debug.Debug)
+
+pub(all) struct UnsupportedStatement {
+  keyword : String
+  text : String
+  location : SourceLocation
+} derive(Eq, @debug.Debug)
+
+pub(all) struct ValueDescription {
+  raw : Int64
+  label : String
+} derive(Eq, @debug.Debug)
+
+// Type aliases
+
+// Traits

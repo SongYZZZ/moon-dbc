@@ -1,0 +1,5 @@
+BS_:
+BU_: ECU
+BO_ 1 Scaling: 4 ECU
+ SG_ Temperature : 0|16@1+ (0.1,-40) [-40|6513.5] "degC" ECU
+ SG_ Reverse : 16|16@1+ (-2,100) [-130970|100] "" ECU

@@ -1,0 +1,6 @@
+BS_:
+BU_: ECU
+BO_ 1 Signed: 8 ECU
+ SG_ OneBit : 0|1@1- (1,0) [-1|0] "" ECU
+ SG_ Twelve : 4|12@1- (1,0) [-2048|2047] "" ECU
+ SG_ TwentyFour : 16|24@1- (1,0) [-8388608|8388607] "" ECU
