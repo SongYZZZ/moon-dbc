@@ -1,0 +1,5 @@
+BS_:
+BU_: ECU
+BO_ 1 Collision: 1 ECU
+ SG_ A : 0|8@1+ (1,0) [0|255] "" ECU
+ SG_ B : 4|4@1+ (1,0) [0|15] "" ECU

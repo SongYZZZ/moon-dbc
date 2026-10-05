@@ -1,0 +1,9 @@
+VERSION "1.0"
+BS_:
+BU_: ECU Dash
+BO_ 293 Multiplex: 4 ECU
+ SG_ Mode M : 0|8@1+ (1,0) [0|255] "" Dash
+ SG_ Common : 24|8@1+ (1,0) [0|255] "" Dash
+ SG_ Temperature m0 : 8|16@1- (0.1,-40) [-3316.8|3236.7] "degC" Dash
+ SG_ Voltage m1 : 8|16@1+ (0.01,0) [0|655.35] "V" Dash
+ SG_ Counter m2 : 8|16@1+ (1,0) [0|65535] "" Dash

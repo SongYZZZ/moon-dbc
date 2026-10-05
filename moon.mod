@@ -24,3 +24,7 @@ keywords = [ "can", "can-fd", "dbc", "automotive", "codec", "multiplex" ]
 preferred_target = "wasm-gc"
 
 description = "MoonDBC: CAN / CAN FD DBC parsing, validation, multiplexed frame codec and CLI"
+
+import {
+  "moonbitlang/x@0.5.1",
+}

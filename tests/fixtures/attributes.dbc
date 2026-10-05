@@ -1,0 +1,20 @@
+VERSION "1.0"
+BS_:
+BU_: ECU Dash
+BO_ 291 EngineData: 1 ECU
+ SG_ Status : 0|8@1+ (1,0) [0|255] "" Dash
+CM_ "MoonDBC 原创测试数据库";
+CM_ BU_ ECU "controller";
+CM_ BO_ 291 "engine status";
+CM_ SG_ 291 Status "status with \"quotes\"";
+BA_DEF_ BO_ "CycleTime" INT 0 1000;
+BA_DEF_DEF_ "CycleTime" 10;
+BA_ "CycleTime" BO_ 291 20;
+BA_DEF_ "Author" STRING;
+BA_ "Author" "MoonDBC";
+BA_DEF_ "Mode" ENUM "Off","On";
+BA_ "Mode" 1;
+BA_DEF_ "Voltage" FLOAT 0 100;
+BA_ "Voltage" 12.5;
+BA_DEF_ "Mask" HEX 0 255;
+BA_ "Mask" 171;

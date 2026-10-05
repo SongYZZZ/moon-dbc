@@ -1,5 +1,13 @@
-// import {
-//   "SongYZZZ/moon-dbc" @lib,
-// }
+import {
+  "SongYZZZ/moon-dbc" @dbc,
+  "moonbitlang/x/fs",
+  "moonbitlang/x/sys",
+  "moonbitlang/core/env",
+  "moonbitlang/core/encoding/utf8",
+}
 
 pkgtype(kind: "executable")
+
+options(
+  "native-stub": [ "process.c" ],
+)
