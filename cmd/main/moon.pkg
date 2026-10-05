@@ -1,0 +1,5 @@
+// import {
+//   "SongYZZZ/moon-dbc" @lib,
+// }
+
+pkgtype(kind: "executable")
