@@ -117,34 +117,35 @@ Label encode 与真实 factor 修订 diff 检查精确输出；有差异时确�
 ## CI
 
 GitHub Actions 已在 Ubuntu **实际全部通过**：format/check/build、三个后端
-各 187 个测试、两个 examples 与六项 CLI。
-[成功 run 37299586605](https://github.com/SongYZZZ/moon-dbc/actions/runs/37299586605)
-对应 cc91a141133ddcb7104d873deec073878f6f5f44，为上一轮 187 tests 的基线。
-本次终审修复已在本地通过三个后端各 203 tests，推送后需要重新核验该提交的 CI。
+各 203 个测试、两个 examples 与六项 CLI。
+[成功 run 37308242417](https://github.com/SongYZZZ/moon-dbc/actions/runs/37308242417)
+对应终审修复提交 173c045d8efebf2fb19c24db27d456d2664ff7ac。
 CI 固定 compiler/core 为 0.10.9+6e6c44045，并初始化 registry。
 首次 run 因 latest formatter 与本地格式版本不同失败；第二次因 clean runner
 没有 registry 失败。这两项均已修复，未跳过格式或测试检查。
 
 ## Git
 
-上一轮开发验收按功能连续创建 **16 个有意义的提交**，已推送到指定 owner。
-最近的前置提交：cc91a14 初始化 registry；69e48ca 固定 compiler/core；
-a591d9a 三后端验收与空模板清理；c504f7d 文档。最后的验收提交记录 remote CI
-与实际 changed-factor/label CLI 检查。未 squash，未伪造历史。
+本轮发布与技能自审完成后形成 **18 个有意义的提交**，已推送到指定 owner。
+最新代码提交：173c045 终审数值与语法回归修复；前置 7fb79b1 验收证据、
+cc91a14 registry 初始化。本轮最后追加的是实际发布与独立 consumer 核验记录。
+未 squash，未伪造历史。
 
 ## Mooncakes
 
-Package status：**Ready to publish**（本节为 0.1.0 发布前的验收快照）。
-`moon package --list` 已生成 `SongYZZZ-moon-dbc-0.1.0.zip`，check 通过；
-`moon publish --dry-run` 实际执行了解包检查并与服务端交互，解包 check 通过。
-此前服务端以 403 拒绝：模块 owner SongYZZZ 与令牌真实身份 hjn0123 不匹配。
-本地凭据中的 username 不能作为发布身份依据。未发布到其他 namespace，
-未更改 owner。包名已被本地正式打包工具接受。
-用户已于 2026-10-05 通过 GitHub 重新执行 moon login。
-已定位旧凭据误读原因：工具进程没有继承用户级 MOON_HOME，读取了
-C:\Users\Lenovo\.moon 的 hjn0123 会话。显式 MOON_HOME=D:\Moonbit 后
-moon whoami 显示 SongYZZZ。尚未获得本次服务端发布成功结果；
-发布后的状态以 registry 和仓库最新报告为准。
+Package status：**Published**。模块：SongYZZZ/moon-dbc@0.1.0。
+2026-10-05，显式 MOON_HOME=D:\Moonbit 后正式执行 moon publish；
+打包、解包后的 moon check 全部通过，**Server status: 200 OK**。
+随后在新建的 D:\Moonbit\verification\moon-dbc-0.1.0 工程执行
+moon add SongYZZZ/moon-dbc@0.1.0，实际日志为 Downloading SongYZZZ/moon-dbc@0.1.0。
+consumer 的 moon check --deny-warn 通过；示例输出 E02E 和 Speed = 1500 rpm，
+进行了精确输出断言。依赖树确认从 registry 获取 0.1.0，而非本地 path。
+下载包的修复 parser/cursor/raw codec 文件哈希与当前源码一致；下载包中的
+native CLI 也实际编译运行，decode 输出 raw=12000、value=1500 rpm、Gear=Drive。
+
+此前 403 的实际原因是工具进程未继承用户级 MOON_HOME，误读 C:\Users\Lenovo\.moon
+下的旧会话；用户终端的 D:\Moonbit 登录正确。没有修改用户凭据、模块 owner
+或发布 namespace。0.1.0 包内的完成报告是发布前验收快照；本仓库本节记录发布后验证。
 
 ## Known Limitations
 
@@ -160,6 +161,9 @@ Wasm CLI 的错误输出走 stdout。互操作测试仅覆盖所列 fixture 与�
 
 ## Remaining Work
 
-执行本次 Mooncakes 0.1.0 发布并核验服务端结果。
-GitHub 推送及远程 CI 已完成。后续版本可扩展 mux 和有边界的流式读取；
+Mooncakes 发布与独立 registry consumer 验证已完成。
+用户最新提供的报名表明确禁止 AI 编写正式申报书，并要求至少三个完整使用场景。
+现有 PROJECT_APPLICATION.md 已标明为 AI 辅助技术参考，不可直接上传；
+用户确认将亲自撰写正式一页 Markdown 申报书，目前该材料待完成。
+GitHub 推送及终审修复的远程 CI 已完成。后续版本可扩展 mux 和有边界的流式读取；
 这些扩展未包含在当前兼容性声明中。

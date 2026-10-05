@@ -89,8 +89,16 @@ pwsh -NoProfile -File scripts/build-cli.ps1
 官方 `moonbitlang/x` 0.5.1 仅用于 CLI 的文件读写与进程退出。
 原生 stderr 的少量 C 代码只承担进程输出，DBC 核心全部使用 MoonBit。
 
-Mooncakes 模块名：`SongYZZZ/moon-dbc`，版本 0.1.0。模块名与元数据已经
-通过真实 `moon package` 验证；实际发布状态见 [Completion Report](docs/COMPLETION_REPORT.md)。
+Mooncakes 模块 `SongYZZZ/moon-dbc@0.1.0` 已发布，并在独立工程从 registry
+下载、编译、运行库示例及 native CLI 验证。添加依赖：
+
+```powershell
+moon add SongYZZZ/moon-dbc@0.1.0
+```
+
+发布与终审自查证据见 [Completion Report](docs/COMPLETION_REPORT.md) 和
+[FINAL_REVIEW](docs/FINAL_REVIEW.md)。PROJECT_APPLICATION.md 是 AI 技术参考，
+不能作为禁止 AI 编写的正式申报书上传。
 
 ## Library API
 

@@ -6,7 +6,11 @@ Review Mode / Acceptance Review Checks，配合 chinese-output。
 
 ## 总体判断
 
-工程验收检查通过；Mooncakes 正式发布及修复后远程 CI 的结果仍待最终核验。
+**工程侧终审自查满足已检查的硬标准。** 严格质量门、实际运行、修复后远程 CI
+与 Mooncakes 正式发布及独立 registry 安装复验全部通过。
+**正式申报材料尚未满足**：用户提供的最新报名表要求参赛者亲自撰写一页
+Markdown、不得使用 AI、至少三个完整使用场景；用户确认目前尚无正式申报书，
+将亲自撰写。PROJECT_APPLICATION.md 已标为 AI 技术参考，不能直接上传。
 自查不能替代赛事方的审核、验收或获奖决定。
 
 规则范围分开处理：
@@ -38,11 +42,12 @@ Review Mode / Acceptance Review Checks，配合 chinese-output。
 | 严格质量门 | moon check --deny-warn、moon test --deny-warn、moon fmt --check、moon build、moon info + moon fmt 已执行 |
 | 实际运行 | 两个 MoonBit examples、native CLI 15/15 smoke、7/7 native benchmarks |
 | 源码规模 | 4660 有效 MoonBit 行：core/CLI 3001、tests 1511、bench 113、examples 35；不含依赖/接口/build/fixture |
-| 提交历史 | 开发基线 16 个连续功能提交，均为 2026-10-05；本次终审修复与发布证据会继续追加 |
-| 文档与申报 | 中英文 README、BIT_NUMBERING、FORMAT_SUPPORT、REFERENCES、设计/测试/兼容性/基准；PROJECT_APPLICATION 约一页 Markdown |
+| 提交历史 | 本轮完成后 18 个连续有效提交，均为 2026-10-05；含功能开发、终审修复和真实发布证据 |
+| 技术文档 | 中英文 README、BIT_NUMBERING、FORMAT_SUPPORT、REFERENCES、设计/测试/兼容性/基准；AI 技术参考与正式申报明确区分 |
+| 正式申报书 | 待参赛者亲自完成；现有 PROJECT_APPLICATION 是 AI 技术参考，不作为合规正式申报书 |
 | 仓库整洁 | git tracked files 未包含 credentials、_build、.oracle、.mooncakes、dist、临时验收目录；这些目录被忽略 |
-| Mooncakes | 打包与解包 check 已通过；待正式上传成功及 registry 安装验证 |
-| 远程 CI | 基线最终提交 7fb79b1 的 run 37300035094 成功；本次修复提交须再次跑 CI |
+| Mooncakes | moon publish 服务端 200 OK；独立 consumer 下载 0.1.0、check、示例及下载包 native CLI 通过 |
+| 远程 CI | 终审修复提交 173c045 的 [run 37308242417](https://github.com/SongYZZZ/moon-dbc/actions/runs/37308242417) 全部通过 |
 
 ## 自查发现与修复
 
@@ -62,6 +67,9 @@ writer、diff、CLI 与 IO 边界；没有仅凭 README 判定实现完成。
 
 ## 需要进一步确认的问题
 
+- 正式申报书须覆盖项目名称、简介、方向/通用性、至少三个完整场景、核心功能、
+  原创/移植/参考类别、适用的上游链接/许可证，以及不少于十个有效 commits 的
+  GitHub 仓库。工程提交数已超过十个。以上是核对清单，不代写场景或申报正文。
 - 赛事报名表是否提交成功、资格审核状态、群昵称及入群状态，无法从仓库确定。
   本次未代填报名表、未发消息或声称已正式通过终审。
 - 2026-10-05 之前的独立项目提交关系不能单凭当前仓库证明；不把八月的重复参赛
@@ -85,4 +93,5 @@ VAL_ 键使用 Int64，64 位 unsigned raw 仍支持完整范围。
 外部 oracle：[COMPATIBILITY](COMPATIBILITY.md)、[interop-results.json](interop-results.json)。
 基准：[BENCHMARKS](BENCHMARKS.md)、[benchmark-native.txt](benchmark-native.txt)。
 汇总：[COMPLETION_REPORT](COMPLETION_REPORT.md)。
-GitHub CI 与 Mooncakes 的最新结果会在正式上传、安装复验后同步到本报告。
+发布与 registry 安装事实已同步。修复 parser、cursor、codec 的下载源码哈希也与
+当前源码一致。完整申报书事实核对清单见 [APPLICATION_CHECKLIST](APPLICATION_CHECKLIST.md)。

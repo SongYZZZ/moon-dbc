@@ -1,5 +1,9 @@
 # MoonDBC
 
+Published to Mooncakes as `SongYZZZ/moon-dbc@0.1.0`. Registry installation,
+the library example and the packaged native CLI were verified in a fresh consumer.
+Add the dependency with `moon add SongYZZZ/moon-dbc@0.1.0`.
+
 An independently implemented MoonBit DBC toolkit for CAN / CAN FD database
 parsing, validation, exact integer frame codecs, multiplexing and a file CLI.
 Author: 宋永振 / SongYZZZ. Repository: https://github.com/SongYZZZ/moon-dbc.

@@ -1,4 +1,8 @@
-# MoonDBC：面向 CAN / CAN FD 的 DBC 数据库解析、校验与报文编解码工具库
+# AI 辅助技术参考：MoonDBC
+
+**本文件由 AI 辅助整理，不是正式项目申报书，请勿直接上传报名表。**
+用户提供的十月报名表要求申报书由参赛者亲自撰写、不使用 AI，并包含至少
+三个完整预期使用场景。用户已确认会亲自撰写；以下仅用于核对技术事实。
 
 参赛者：宋永振。GitHub：[SongYZZZ/moon-dbc](https://github.com/SongYZZZ/moon-dbc)。
 项目为原创 MoonBit 开源工程，许可证 Apache-2.0，模块名 SongYZZZ/moon-dbc。
