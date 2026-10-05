@@ -26,6 +26,7 @@ or compare database revisions. Hardware drivers and protocol stacks remain separ
 Verified with moonc v0.10.9, moon 0.1.20260819 on Windows 11:
 
 ```powershell
+moon update
 moon check
 moon test
 moon fmt --check

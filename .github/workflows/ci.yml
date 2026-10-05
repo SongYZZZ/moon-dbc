@@ -12,6 +12,7 @@ jobs:
           version: '0.10.9+6e6c44045'
           core-version: '0.10.9+6e6c44045'
       - run: moon version --all
+      - run: moon update
       - run: moon fmt --check
       - run: moon check --deny-warn
       - run: moon test --deny-warn

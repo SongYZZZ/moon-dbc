@@ -75,6 +75,7 @@ DBC 存在厂商扩展和历史实现差异。本库不声称完整 DBC 标准�
 
 ```powershell
 moon version --all
+moon update
 moon check
 moon test
 moon fmt --check
