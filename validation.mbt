@@ -358,7 +358,12 @@ fn validate_attributes(db : Database, out : Array[Diagnostic]) -> Unit {
             ),
           )
         }
-        if !attribute_value_valid(d.kind, a.value) {
+        let valid_enum_default = a.target is None &&
+          (match (d.kind, a.value) {
+            (EnumType(choices), Text(label)) => choices.contains(label)
+            _ => false
+          })
+        if !valid_enum_default && !attribute_value_valid(d.kind, a.value) {
           out.push(
             diagnostic(
               "attribute.value",

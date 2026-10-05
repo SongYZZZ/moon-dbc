@@ -19,6 +19,7 @@ pub fn parse_dbc_with_options(
   let pending : Array[(UInt, String, Array[ValueDescription], SourceLocation)] = []
   let mut current : Message? = None
   let mut total_signals = 0
+  let mut metadata_records = 0
   while true {
     p.skip_lines()
     if p.peek().text == "" && !p.peek().quoted {
@@ -36,7 +37,16 @@ pub fn parse_dbc_with_options(
       "NS_" => {
         p.expect(":")
         while p.peek().text != "BS_" && p.peek().text != "" {
-          p.index += 1
+          let declaration = p.take()
+          if declaration.text != "\n" &&
+            (declaration.quoted || !valid_name(declaration.text)) {
+            p.error(
+              "parse.namespace", "invalid namespace declaration or missing BS_ terminator",
+            )
+          }
+        }
+        if p.peek().text == "" {
+          p.error("parse.namespace", "NS_ must terminate at BS_")
         }
       }
       "BS_" => {
@@ -47,6 +57,9 @@ pub fn parse_dbc_with_options(
         p.expect(":")
         while p.peek().text != "\n" && p.peek().text != "" {
           let location = p.peek().location
+          if db.nodes.length() >= p.limits.max_nodes {
+            p.error("limit.nodes", "node budget exceeded")
+          }
           db.nodes.push({ name: p.name(), location })
         }
         p.end_line()
@@ -89,6 +102,26 @@ pub fn parse_dbc_with_options(
           }
         }
         let signal = parse_signal(p, head.location)
+        try signal_bits(signal, message.length) catch {
+          Failure(d) =>
+            raise Failure(signal_diagnostic(message, signal, d.code, d.message))
+        } noraise {
+          _ => ()
+        }
+        if signal.factor == 0.0 {
+          raise Failure(
+            signal_diagnostic(
+              message, signal, "signal.factor", "zero scaling factor",
+            ),
+          )
+        }
+        if signal.minimum > signal.maximum {
+          raise Failure(
+            signal_diagnostic(
+              message, signal, "signal.range", "minimum exceeds maximum",
+            ),
+          )
+        }
         if message.signals.length() >= p.limits.max_signals_per_message ||
           total_signals >= p.limits.max_total_signals {
           p.error("limit.signals", "signal budget exceeded")
@@ -113,6 +146,10 @@ pub fn parse_dbc_with_options(
           }
           let raw = p.integer()
           let label = p.quoted()
+          metadata_records += 1
+          if metadata_records > p.limits.max_metadata_records {
+            p.error("limit.metadata", "metadata budget exceeded")
+          }
           values.push({ raw, label })
         }
         p.expect(";")
@@ -146,6 +183,22 @@ pub fn parse_dbc_with_options(
         })
       }
       _ => preserve_statement(p, source, head, options.mode, db)
+    }
+    if head.text != "BO_" &&
+      head.text != "SG_" &&
+      head.text != "BU_" &&
+      head.text != "VERSION" &&
+      head.text != "BS_" &&
+      head.text != "NS_" {
+      metadata_records += 1
+      if metadata_records > p.limits.max_metadata_records {
+        p.error("limit.metadata", "metadata budget exceeded")
+      }
+    }
+    if head.text.has_prefix("BA_") &&
+      p.tokens[p.index - 1].end_offset - head.location.offset >
+      p.limits.max_attribute_size {
+      p.error("limit.attribute", "attribute exceeds budget")
     }
   }
   for entry in pending {
@@ -324,9 +377,9 @@ fn parse_attribute_value(p : Parser) -> AttributeValue raise DbcError {
   }
   let location = p.peek().location
   let text = p.number_text()
-  if text.contains(".") ||
-    text.contains("e") ||
-    (text.contains("E") && !text.has_prefix("0x")) {
+  if !text.has_prefix("0x") &&
+    !text.has_prefix("0X") &&
+    (text.contains(".") || text.contains("e") || text.contains("E")) {
     let value = @string.parse_double(text) catch {
       _ =>
         raise Failure(

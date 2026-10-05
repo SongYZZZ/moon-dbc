@@ -5,24 +5,7 @@ pub fn decode_signal_raw(
   payload : Array[Byte],
 ) -> RawValue raise DbcError {
   let positions = signal_bits(signal, payload.length())
-  let bits = match signal.byte_order {
-    Intel => extract_intel(payload, positions)
-    Motorola => extract_motorola(payload, positions)
-  }
-  if !signal.signed {
-    return Unsigned(bits)
-  }
-  if signal.bit_length == 64 {
-    return Signed(bits.reinterpret_as_int64())
-  }
-  let sign = 1UL << (signal.bit_length - 1)
-  Signed(
-    (if (bits & sign) != 0UL {
-      bits | (0xFFFFFFFFFFFFFFFFUL << signal.bit_length)
-    } else {
-      bits
-    }).reinterpret_as_int64(),
-  )
+  raw_from_positions(signal, payload, positions)
 }
 
 ///|
@@ -79,6 +62,16 @@ pub fn encode_signal_raw(
 ) -> Unit raise DbcError {
   let positions = signal_bits(signal, payload.length())
   let bits = checked_raw_bits(signal, raw)
+  write_bits(signal, payload, positions, bits)
+}
+
+///|
+fn write_bits(
+  signal : Signal,
+  payload : Array[Byte],
+  positions : Array[Int],
+  bits : UInt64,
+) -> Unit {
   for i, position in positions {
     let weight = match signal.byte_order {
       Intel => i

@@ -395,6 +395,9 @@ pub(all) struct ParseLimits {
   max_signals_per_message : Int
   max_total_signals : Int
   max_attribute_size : Int
+  max_nodes : Int
+  max_tokens : Int
+  max_metadata_records : Int
 } derive(Eq, @debug.Debug)
 
 ///|
@@ -409,6 +412,9 @@ pub fn ParseLimits::default() -> ParseLimits {
     max_signals_per_message: 512,
     max_total_signals: 100000,
     max_attribute_size: 65536,
+    max_nodes: 10000,
+    max_tokens: 2000000,
+    max_metadata_records: 100000,
   }
 }
 

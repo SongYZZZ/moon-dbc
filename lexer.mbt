@@ -16,6 +16,9 @@ fn lex(source : String, limits : ParseLimits) -> Array[Token] raise DbcError {
   let mut line = 1
   let mut column = 1
   while i < source.length() {
+    if tokens.length() >= limits.max_tokens {
+      fail("limit.tokens", "token budget exceeded")
+    }
     let start = i
     let location = { line, column, offset: i }
     let c = source[i].to_int()
@@ -42,6 +45,15 @@ fn lex(source : String, limits : ParseLimits) -> Array[Token] raise DbcError {
       let mut closed = false
       while i < source.length() {
         let q = source[i].to_int()
+        if q < 32 && q != 10 && q != 13 && q != 9 {
+          raise Failure(
+            diagnostic(
+              "lex.character",
+              "invalid quoted control character",
+              location~,
+            ),
+          )
+        }
         if i - start > limits.max_token_length {
           raise Failure(
             diagnostic("limit.token", "quoted token exceeds budget", location~),
@@ -123,6 +135,11 @@ fn lex(source : String, limits : ParseLimits) -> Array[Token] raise DbcError {
       column += 1
     } else {
       while i < source.length() {
+        if column > limits.max_line_length {
+          raise Failure(
+            diagnostic("limit.line", "line exceeds budget", location~),
+          )
+        }
         let v = source[i].to_int()
         if v == 43 || v == 45 {
           if i == start ||

@@ -305,7 +305,7 @@ pub fn CompiledMessage::encode(
     )
   }
   let payload : Array[Byte] = Array::make(m.length, 0)
-  for s in m.signals {
+  for i, s in m.signals {
     if !branch_active(s.multiplex, selector) {
       if inputs.contains(s.name) {
         fail(
@@ -322,8 +322,12 @@ pub fn CompiledMessage::encode(
         Raw(Unsigned(0UL))
       }
     }
-    let raw = assignment_raw(s, value, range_policy, diagnostics)
-    encode_signal_raw(s, payload, raw)
+    let raw = if s.multiplex == Multiplexer {
+      Unsigned(selector.unwrap())
+    } else {
+      assignment_raw(s, value, range_policy, diagnostics)
+    }
+    write_bits(s, payload, self.positions[i], checked_raw_bits(s, raw))
   }
   { frame: { frame_id: m.frame_id, payload }, diagnostics }
 }

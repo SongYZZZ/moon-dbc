@@ -146,7 +146,7 @@ test "multiplex markers" {
 ///|
 test "scientific and negative scaling" {
   let s = parse_dbc(
-      "BO_ 1 A: 1 X\n SG_ B : 0|8@0- (1e-2,-4.5) [-4.5|1e+2] \"V\" X\n",
+      "BO_ 1 A: 1 X\n SG_ B : 7|8@0- (1e-2,-4.5) [-4.5|1e+2] \"V\" X\n",
     ).messages[0].signals[0]
   assert_eq(s.byte_order, Motorola)
   assert_eq(s.factor, 0.01)
