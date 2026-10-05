@@ -234,7 +234,7 @@ pub(all) enum ObjectRef {
   NodeRef(String)
   MessageRef(UInt)
   SignalRef(UInt, String)
-} derive(Eq, @debug.Debug)
+} derive(Eq, Hash, @debug.Debug)
 
 ///|
 /// Typed attribute grammar; bounds are physical numeric bounds.
