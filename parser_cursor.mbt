@@ -31,7 +31,7 @@ fn Parser::take(self : Parser) -> Token raise DbcError {
 
 ///|
 fn Parser::skip_lines(self : Parser) -> Unit {
-  while self.peek().text == "\n" {
+  while self.peek().text == "\n" && !self.peek().quoted {
     self.index += 1
   }
 }
@@ -100,7 +100,17 @@ fn Parser::name(self : Parser) -> String raise DbcError {
 fn Parser::number_text(self : Parser) -> String raise DbcError {
   let mut prefix = ""
   if self.peek().text == "-" || self.peek().text == "+" {
-    prefix = self.take().text
+    let sign = self.take()
+    if sign.quoted {
+      raise Failure(
+        diagnostic(
+          "parse.number",
+          "quoted numeric sign",
+          location=sign.location,
+        ),
+      )
+    }
+    prefix = sign.text
   }
   let t = self.take()
   if t.quoted {
@@ -173,7 +183,7 @@ fn Parser::real(self : Parser) -> Double raise DbcError {
 ///|
 fn Parser::end_line(self : Parser) -> Unit raise DbcError {
   let t = self.peek()
-  if t.text == "\n" {
+  if t.text == "\n" && !t.quoted {
     self.index += 1
   } else if t.text != "" || t.quoted {
     self.error("parse.trailing", "unexpected tokens at end of line")
@@ -182,6 +192,9 @@ fn Parser::end_line(self : Parser) -> Unit raise DbcError {
 
 ///|
 fn Parser::object_ref(self : Parser) -> ObjectRef raise DbcError {
+  if self.peek().quoted {
+    return DatabaseRef
+  }
   match self.peek().text {
     "BU_" => {
       self.index += 1

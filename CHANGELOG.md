@@ -8,5 +8,7 @@
 - Value descriptions, scoped comments, attribute schemas/defaults/assignments.
 - Deterministic semantic writer, revision diff, database inventory and bit layout.
 - Native/JS/Wasm file CLI and runnable library examples.
-- 187 unit tests, deterministic raw round-trips, independent interoperability and
+- 203 unit tests, deterministic raw round-trips, independent interoperability and
   actual native benchmarks. GitHub CI configured; run status is separately reported.
+- Acceptance review fixed physical integer rounding above 2^52 and quoted token
+  handling in metadata, numeric signs and preserved extensions before publication.

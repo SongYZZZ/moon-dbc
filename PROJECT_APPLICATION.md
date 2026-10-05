@@ -14,8 +14,8 @@
 生态查重确认已有 curry3point/dbc-toolkit。MoonDBC 的独立价值集中在 basic mux、
 属性与默认值、数据库／节点注释和完整文件 CLI；其源代码未复制或移植。
 
-测试包含 187 个独立用例、1536 个固定种子 raw round-trip、人工 Motorola 位图、
-37 个 cantools 交叉验证向量和真实 CLI smoke。CI 配置标准质量门与多后端检查。
+测试包含 203 个独立用例、1536 个固定种子 raw round-trip、人工 Motorola 位图、
+41 个 cantools 交叉验证向量和真实 CLI smoke。CI 配置标准质量门与多后端检查。
 文档提供支持表、位编号图、算法说明、实测 benchmark 和兼容性证据。
 
 0.1.0 的边界为整数信号和基本 mux，不声称完整 DBC 或 CAN FD 传输层支持。

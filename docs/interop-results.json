@@ -2,8 +2,8 @@
   "date": "2026-10-05",
   "oracle": "cantools",
   "version": "44.1.0",
-  "cases": 37,
-  "passed": 37,
+  "cases": 41,
+  "passed": 41,
   "rows": [
     {
       "fixture": "tests/fixtures/basic.dbc",
@@ -516,6 +516,122 @@
       },
       "moon_encoded": "000000000000008000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000A5",
       "oracle_encoded": "000000000000008000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000A5",
+      "match": true
+    },
+    {
+      "fixture": "tests/fixtures/precision_unsigned.dbc",
+      "input": "0100000000001000",
+      "dbc_id": 300,
+      "moon": {
+        "message": "PreciseUnsigned",
+        "dbc_id": 300,
+        "signals": [
+          {
+            "name": "Value",
+            "raw": "4503599627370497",
+            "physical": 4503599627370497,
+            "unit": "",
+            "label": null,
+            "out_of_range": false
+          }
+        ],
+        "diagnostics": []
+      },
+      "oracle_raw": {
+        "Value": 4503599627370497
+      },
+      "oracle_physical": {
+        "Value": 4503599627370497
+      },
+      "moon_encoded": "0100000000001000",
+      "oracle_encoded": "0100000000001000",
+      "match": true
+    },
+    {
+      "fixture": "tests/fixtures/precision_unsigned.dbc",
+      "input": "FFFFFFFFFFFF1F00",
+      "dbc_id": 300,
+      "moon": {
+        "message": "PreciseUnsigned",
+        "dbc_id": 300,
+        "signals": [
+          {
+            "name": "Value",
+            "raw": "9007199254740991",
+            "physical": 9007199254740991,
+            "unit": "",
+            "label": null,
+            "out_of_range": false
+          }
+        ],
+        "diagnostics": []
+      },
+      "oracle_raw": {
+        "Value": 9007199254740991
+      },
+      "oracle_physical": {
+        "Value": 9007199254740991
+      },
+      "moon_encoded": "FFFFFFFFFFFF1F00",
+      "oracle_encoded": "FFFFFFFFFFFF1F00",
+      "match": true
+    },
+    {
+      "fixture": "tests/fixtures/precision_signed.dbc",
+      "input": "FFFFFFFFFFFFEFFF",
+      "dbc_id": 301,
+      "moon": {
+        "message": "PreciseSigned",
+        "dbc_id": 301,
+        "signals": [
+          {
+            "name": "Value",
+            "raw": "-4503599627370497",
+            "physical": -4503599627370497,
+            "unit": "",
+            "label": null,
+            "out_of_range": false
+          }
+        ],
+        "diagnostics": []
+      },
+      "oracle_raw": {
+        "Value": -4503599627370497
+      },
+      "oracle_physical": {
+        "Value": -4503599627370497
+      },
+      "moon_encoded": "FFFFFFFFFFFFEFFF",
+      "oracle_encoded": "FFFFFFFFFFFFEFFF",
+      "match": true
+    },
+    {
+      "fixture": "tests/fixtures/precision_signed.dbc",
+      "input": "010000000000E0FF",
+      "dbc_id": 301,
+      "moon": {
+        "message": "PreciseSigned",
+        "dbc_id": 301,
+        "signals": [
+          {
+            "name": "Value",
+            "raw": "-9007199254740991",
+            "physical": -9007199254740991,
+            "unit": "",
+            "label": null,
+            "out_of_range": false
+          }
+        ],
+        "diagnostics": []
+      },
+      "oracle_raw": {
+        "Value": -9007199254740991
+      },
+      "oracle_physical": {
+        "Value": -9007199254740991
+      },
+      "moon_encoded": "010000000000E0FF",
+      "oracle_encoded": "010000000000E0FF",
       "match": true
     },
     {

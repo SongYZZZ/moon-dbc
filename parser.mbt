@@ -335,23 +335,37 @@ fn parse_attribute_definition(
   p : Parser,
   location : SourceLocation,
 ) -> AttributeDefinition raise DbcError {
-  let scope = match p.peek().text {
-    "BU_" => {
-      p.index += 1
-      NodeScope
+  let scope = if p.peek().quoted {
+    DatabaseScope
+  } else {
+    match p.peek().text {
+      "BU_" => {
+        p.index += 1
+        NodeScope
+      }
+      "BO_" => {
+        p.index += 1
+        MessageScope
+      }
+      "SG_" => {
+        p.index += 1
+        SignalScope
+      }
+      _ => DatabaseScope
     }
-    "BO_" => {
-      p.index += 1
-      MessageScope
-    }
-    "SG_" => {
-      p.index += 1
-      SignalScope
-    }
-    _ => DatabaseScope
   }
   let name = p.quoted()
-  let kind = match p.take().text {
+  let type_token = p.take()
+  if type_token.quoted {
+    raise Failure(
+      diagnostic(
+        "attribute.type",
+        "quoted attribute type",
+        location=type_token.location,
+      ),
+    )
+  }
+  let kind = match type_token.text {
     "INT" => IntType(p.integer(), p.integer())
     "HEX" => HexType(p.integer(), p.integer())
     "FLOAT" => FloatType(p.real(), p.real())
@@ -359,7 +373,7 @@ fn parse_attribute_definition(
     "ENUM" => {
       let choices = [p.quoted()]
       while p.peek().text == "," {
-        p.index += 1
+        p.expect(",")
         choices.push(p.quoted())
       }
       EnumType(choices)
@@ -441,7 +455,8 @@ fn preserve_statement(
     )
   }
   let mut end_offset = head.end_offset
-  while p.peek().text != "\n" && (p.peek().text != "" || p.peek().quoted) {
+  while (p.peek().text != "\n" || p.peek().quoted) &&
+        (p.peek().text != "" || p.peek().quoted) {
     let t = p.take()
     end_offset = t.end_offset
     if t.text == ";" && !t.quoted {

@@ -1,6 +1,7 @@
 # Measured benchmarks
 
 Executed 2026-10-05 using `moon bench --target native --release`.
+Rerun after the acceptance-review fixes, with `MOON_HOME=D:\Moonbit`.
 
 - moon 0.1.20260819 (fc2a4ee), moonc v0.10.9+6e6c44045, moonrun 0.1.20260819.
 - Native release backend; Intel Core i7-14650HX.
@@ -11,13 +12,13 @@ Executed 2026-10-05 using `moon bench --target native --release`.
 
 | Workload | Mean | Standard deviation |
 |---|---:|---:|
-| Parse small database (2 signals) | 20.77 µs | 1.05 µs |
-| Parse 100 messages / 800 signals | 4.66 ms | 367.51 µs |
-| Parse 1000 messages / 8000 signals | 50.51 ms | 4.00 ms |
-| Parse 1000 messages / 10000 signals | 59.37 ms | 2.03 ms |
-| Decode 100k frames, cached layout | 33.39 ms | 703.62 µs |
-| Encode 100k frames, cached layout | 61.17 ms | 7.51 ms |
-| Semantic diff, 100 messages | 1.93 ms | 67.09 µs |
+| Parse small database (2 signals) | 22.12 µs | 2.23 µs |
+| Parse 100 messages / 800 signals | 4.10 ms | 84.92 µs |
+| Parse 1000 messages / 8000 signals | 48.92 ms | 4.66 ms |
+| Parse 1000 messages / 10000 signals | 62.62 ms | 3.50 ms |
+| Decode 100k frames, cached layout | 121.55 ms | 2.80 ms |
+| Encode 100k frames, cached layout | 155.03 ms | 7.63 ms |
+| Semantic diff, 100 messages | 2.06 ms | 108.33 µs |
 
 Parser numbers measure parsing and structural layout checks, not a subsequent full
 database validation pass. Large sources are built once outside timing. Checksums

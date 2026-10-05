@@ -143,11 +143,15 @@ pub fn physical_to_raw(
   if !finite(unrounded) || unrounded.abs() > 9007199254740991.0 {
     fail("codec.precision", "use raw API outside exact Double integer range")
   }
-  let rounded = if unrounded < 0.0 {
-    -@double.floor(-unrounded + 0.5)
+  // Adding 0.5 can change already integral values above 2^52 through IEEE rounding.
+  let magnitude = unrounded.abs()
+  let integral = @double.floor(magnitude)
+  let nearest = if magnitude - integral >= 0.5 {
+    integral + 1.0
   } else {
-    @double.floor(unrounded + 0.5)
+    integral
   }
+  let rounded = if unrounded < 0.0 { -nearest } else { nearest }
   let raw = if signal.signed {
     Signed(rounded.to_int64())
   } else {

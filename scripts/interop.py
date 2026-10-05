@@ -32,6 +32,10 @@ def main():
         ("multiplex", "0134120B"), ("multiplex", "0234120B"),
         ("canfd", "FF" * 64),
         ("canfd", "0000000000000080" + "00" * 55 + "A5"),
+        ("precision_unsigned", "0100000000001000"),
+        ("precision_unsigned", "FFFFFFFFFFFF1F00"),
+        ("precision_signed", "FFFFFFFFFFFFEFFF"),
+        ("precision_signed", "010000000000E0FF"),
     ]
     rows = []
     for name, payload in vectors:
@@ -52,6 +56,13 @@ def main():
         encoded = m.encode(expected, scaling=False, strict=False).hex().upper()
         result = run(binary, ["encode", path, str(dbc_id), "--raw", *[f"{k}={v}" for k,v in expected.items()]])
         assert result == encoded, (name, result, encoded)
+        if name.startswith("precision_"):
+            # Physical encode must also preserve these exactly representable integers.
+            # This catches accidental +0.5 rounding above 2^52 in the MoonBit codec.
+            physical_encoded = run(binary, ["encode", path, str(dbc_id),
+                                    *[f"{k}={int(v)}" for k,v in physical.items()]])
+            assert physical_encoded == m.encode(physical).hex().upper(), (name, physical_encoded, encoded)
+            assert physical_encoded == encoded
         rows.append({"fixture": path, "input": payload, "dbc_id": dbc_id,
                      "moon": moon, "oracle_raw": expected, "oracle_physical": physical,
                      "moon_encoded": result, "oracle_encoded": encoded, "match": True})

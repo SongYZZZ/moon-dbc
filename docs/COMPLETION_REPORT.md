@@ -70,9 +70,9 @@ Native/JS 错误输出到 stderr；wasm 输出到 stdout，见已知限制。
 
 | Backend | Total | Passed | Failed |
 |---|---:|---:|---:|
-| wasm-gc | 187 | 187 | 0 |
-| native | 187 | 187 | 0 |
-| js | 187 | 187 | 0 |
+| wasm-gc | 203 | 203 | 0 |
+| native | 203 | 203 | 0 |
+| js | 203 | 203 | 0 |
 
 另有固定 seed 的 1536 次布局/值断言，不计为独立测试 case。
 已实际执行 moon info、moon fmt、moon fmt --check、moon check --deny-warn、
@@ -81,7 +81,8 @@ Native/JS 错误输出到 stderr；wasm 输出到 stdout，见已知限制。
 
 ## Interoperability Tests
 
-cantools 44.1.0，37/37 向量通过：raw 值、physical 值、活动信号与编码 bytes。
+cantools 44.1.0，41/41 向量通过：raw 值、physical 值、活动信号与编码 bytes。
+新增四个精确大整数向量，还对照了 physical encode 的输出 bytes。
 包括 25 个 oracle 生成的 Motorola 非对齐和 signed 边界向量。
 完整可复验记录见 [interop-results.json](interop-results.json)，
 oracle 策略与覆盖边界见 [COMPATIBILITY](COMPATIBILITY.md)。
@@ -93,11 +94,11 @@ oracle 策略与覆盖边界见 [COMPATIBILITY](COMPATIBILITY.md)。
 
 | Category | Files | Physical lines | Effective lines |
 |---|---:|---:|---:|
-| Core MoonBit + CLI | 14 | 3335 | 2970 |
-| Tests | 13 | 1731 | 1358 |
+| Core MoonBit + CLI | 14 | 3367 | 3001 |
+| Tests | 14 | 1915 | 1511 |
 | Benchmarks | 1 | 128 | 113 |
 | Examples | 2 | 37 | 35 |
-| Total | 30 | 5231 | 4476 |
+| Total | 31 | 5447 | 4660 |
 
 ## CLI Smoke Tests
 
@@ -107,10 +108,10 @@ Label encode 与真实 factor 修订 diff 检查精确输出；有差异时确�
 
 ## Benchmark
 
-已实际执行 native release 的七项 benchmark。均值：小库解析 20.77 µs；
-100 messages/800 signals 4.66 ms；1000/8000 为 50.51 ms；1000/10000 为
-59.37 ms；缓存 decode 100k frames 33.39 ms；encode 100k 为 61.17 ms；
-100 messages diff 1.93 ms。原始日志、标准差和测量范围见
+终审修复后重新执行 native release 的七项 benchmark。均值：小库解析 22.12 µs；
+100 messages/800 signals 4.10 ms；1000/8000 为 48.92 ms；1000/10000 为
+62.62 ms；缓存 decode 100k frames 121.55 ms；encode 100k 为 155.03 ms；
+100 messages diff 2.06 ms。原始日志、标准差和测量范围见
 [BENCHMARKS](BENCHMARKS.md)。未声称与其他工具的性能对比。
 
 ## CI
@@ -118,26 +119,32 @@ Label encode 与真实 factor 修订 diff 检查精确输出；有差异时确�
 GitHub Actions 已在 Ubuntu **实际全部通过**：format/check/build、三个后端
 各 187 个测试、两个 examples 与六项 CLI。
 [成功 run 37299586605](https://github.com/SongYZZZ/moon-dbc/actions/runs/37299586605)
-对应 cc91a141133ddcb7104d873deec073878f6f5f44；后续验收文档与 CLI fixture
-更新未修改 MoonBit 源码。CI 固定 compiler/core 为 0.10.9+6e6c44045，并初始化 registry。
+对应 cc91a141133ddcb7104d873deec073878f6f5f44，为上一轮 187 tests 的基线。
+本次终审修复已在本地通过三个后端各 203 tests，推送后需要重新核验该提交的 CI。
+CI 固定 compiler/core 为 0.10.9+6e6c44045，并初始化 registry。
 首次 run 因 latest formatter 与本地格式版本不同失败；第二次因 clean runner
 没有 registry 失败。这两项均已修复，未跳过格式或测试检查。
 
 ## Git
 
-截至本报告提交，按功能连续创建 **16 个有意义的提交**，已推送到指定 owner。
+上一轮开发验收按功能连续创建 **16 个有意义的提交**，已推送到指定 owner。
 最近的前置提交：cc91a14 初始化 registry；69e48ca 固定 compiler/core；
 a591d9a 三后端验收与空模板清理；c504f7d 文档。最后的验收提交记录 remote CI
 与实际 changed-factor/label CLI 检查。未 squash，未伪造历史。
 
 ## Mooncakes
 
-Package status：**Cannot publish due to authentication**。
+Package status：**Ready to publish**（本节为 0.1.0 发布前的验收快照）。
 `moon package --list` 已生成 `SongYZZZ-moon-dbc-0.1.0.zip`，check 通过；
 `moon publish --dry-run` 实际执行了解包检查并与服务端交互，解包 check 通过。
-服务端以 403 拒绝：模块 owner SongYZZZ 与令牌真实身份 hjn0123 不匹配。
+此前服务端以 403 拒绝：模块 owner SongYZZZ 与令牌真实身份 hjn0123 不匹配。
 本地凭据中的 username 不能作为发布身份依据。未发布到其他 namespace，
 未更改 owner。包名已被本地正式打包工具接受。
+用户已于 2026-10-05 通过 GitHub 重新执行 moon login。
+已定位旧凭据误读原因：工具进程没有继承用户级 MOON_HOME，读取了
+C:\Users\Lenovo\.moon 的 hjn0123 会话。显式 MOON_HOME=D:\Moonbit 后
+moon whoami 显示 SongYZZZ。尚未获得本次服务端发布成功结果；
+发布后的状态以 registry 和仓库最新报告为准。
 
 ## Known Limitations
 
@@ -153,6 +160,6 @@ Wasm CLI 的错误输出走 stdout。互操作测试仅覆盖所列 fixture 与�
 
 ## Remaining Work
 
-在 SongYZZZ 的 Mooncakes 会话中重新登录后才能发布 0.1.0。
+执行本次 Mooncakes 0.1.0 发布并核验服务端结果。
 GitHub 推送及远程 CI 已完成。后续版本可扩展 mux 和有边界的流式读取；
 这些扩展未包含在当前兼容性声明中。

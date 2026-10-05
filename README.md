@@ -167,9 +167,9 @@ always-active 信号，并产生 warning；编码拒绝 inactive、unknown、重
 实际错误示例：`error [signal.overlap] line 5:2 Collision.B: overlap with A at bit 4`。
 解析错误与严重布局错误会抛出；validate_database 收集可检查的语义问题。
 
-187 个非重复 MoonBit 测试已通过默认 wasm-gc；native、JS 同样执行验证。
+203 个非重复 MoonBit 测试已通过默认 wasm-gc、native 和 JS。
 固定种子测试另外执行 1536 个 raw round-trip，不把这些循环伪装成独立 test 数。
-37 个 cantools 44.1.0 交叉验证向量通过；15 个实际 CLI smoke 用例通过。
+41 个 cantools 44.1.0 交叉验证向量通过；15 个实际 CLI smoke 用例通过。
 
 ```powershell
 moon check --deny-warn

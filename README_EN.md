@@ -86,7 +86,7 @@ not implemented. Extended DBC IDs use bit 31; reserved bits 29/30 are rejected.
 The writer is semantic, not formatting-lossless. Preserved extensions have no
 codec semantics. Unknown multiline extensions are retained per line.
 
-187 MoonBit tests, 1536 additional deterministic raw round-trips, 37 cantools
+203 MoonBit tests, 1536 additional deterministic raw round-trips, 41 cantools
 vectors and 15 native CLI smoke cases were executed. No coverage claim is made.
 See [TESTING](docs/TESTING.md), [COMPATIBILITY](docs/COMPATIBILITY.md),
 [BENCHMARKS](docs/BENCHMARKS.md) and [BIT_NUMBERING](docs/BIT_NUMBERING.md).
