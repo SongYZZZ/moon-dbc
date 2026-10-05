@@ -9,9 +9,15 @@ test "standard and extended identity" {
 
 ///|
 test "identifier reserved flags" {
-  assert_true((try? frame_id_from_dbc(0x40000000U)) is Err(_))
-  assert_true((try? FrameId::new(0x800U)) is Err(_))
-  assert_true((try? FrameId::new(0x20000000U, extended=true)) is Err(_))
+  expect_error(
+    fn() raise DbcError { frame_id_from_dbc(0x40000000U) },
+    "id.flags",
+  )
+  expect_error(fn() raise DbcError { FrameId::new(0x800U) }, "id.range")
+  expect_error(
+    fn() raise DbcError { FrameId::new(0x20000000U, extended=true) },
+    "id.range",
+  )
 }
 
 ///|
