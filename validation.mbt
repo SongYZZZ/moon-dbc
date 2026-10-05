@@ -111,6 +111,7 @@ fn validate_message(
   m : Message,
   db : Database,
   out : Array[Diagnostic],
+  check_nodes? : Bool = true,
 ) -> Unit {
   if m.length < 0 || m.length > 64 {
     out.push(
@@ -147,7 +148,7 @@ fn validate_message(
       )
     }
     for receiver in s.receivers {
-      if !known_node(db, receiver) {
+      if check_nodes && !known_node(db, receiver) {
         out.push(
           signal_diagnostic(
             m,
