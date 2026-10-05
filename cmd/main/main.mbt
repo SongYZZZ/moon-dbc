@@ -21,6 +21,10 @@ fn main {
       print_stderr(@dbc.render_diagnostic(d) + "\n")
       2
     }
+    @fs.IOError(message) => {
+      print_stderr("error [io.read]: " + message + "\n")
+      2
+    }
     e => {
       print_stderr("error [io.read]: " + e.to_string() + "\n")
       2

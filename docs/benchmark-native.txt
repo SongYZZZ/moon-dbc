@@ -1,0 +1,22 @@
+[SongYZZZ/moon-dbc] bench benchmark_test.mbt:15 ("parse small DBC") ok
+time (mean ± σ)         range (min … max) 
+  20.77 µs ±   1.05 µs    19.35 µs …  22.00 µs  in 5 ×   4357 runs
+[SongYZZZ/moon-dbc] bench benchmark_test.mbt:30 ("parse 100 messages") ok
+time (mean ± σ)         range (min … max) 
+   4.66 ms ± 367.51 µs     4.22 ms …   5.12 ms  in 5 ×     22 runs
+[SongYZZZ/moon-dbc] bench benchmark_test.mbt:45 ("parse 1000 messages") ok
+time (mean ± σ)         range (min … max) 
+  50.51 ms ±   4.00 ms    45.80 ms …  55.33 ms  in 5 ×      2 runs
+[SongYZZZ/moon-dbc] bench benchmark_test.mbt:60 ("parse 10000 signals") ok
+time (mean ± σ)         range (min … max) 
+  59.37 ms ±   2.03 ms    57.10 ms …  61.58 ms  in 5 ×      2 runs
+[SongYZZZ/moon-dbc] bench benchmark_test.mbt:75 ("decode 100k frames cached") ok
+time (mean ± σ)         range (min … max) 
+  33.39 ms ± 703.62 µs    32.44 ms …  34.09 ms  in 5 ×      3 runs
+[SongYZZZ/moon-dbc] bench benchmark_test.mbt:98 ("encode 100k frames cached") ok
+time (mean ± σ)         range (min … max) 
+  61.17 ms ±   7.51 ms    56.20 ms …  74.32 ms  in 5 ×      2 runs
+[SongYZZZ/moon-dbc] bench benchmark_test.mbt:121 ("semantic diff 100 messages") ok
+time (mean ± σ)         range (min … max) 
+   1.93 ms ±  67.09 µs     1.85 ms …   1.99 ms  in 5 ×     53 runs
+Total tests: 7, passed: 7, failed: 0.

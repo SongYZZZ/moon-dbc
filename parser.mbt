@@ -266,6 +266,9 @@ fn parse_signal(p : Parser, location : SourceLocation) -> Signal raise DbcError 
     p.error("signal.length", "integer signals must be 1..64 bits")
   }
   p.expect("@")
+  if p.peek().quoted {
+    p.error("signal.order", "quoted byte order is invalid")
+  }
   let byte_order = match p.take().text {
     "1" => Intel
     "0" => Motorola
@@ -273,6 +276,9 @@ fn parse_signal(p : Parser, location : SourceLocation) -> Signal raise DbcError 
       p.error("signal.order", "byte order must be 0 or 1")
       Intel
     }
+  }
+  if p.peek().quoted {
+    p.error("signal.sign", "quoted signedness is invalid")
   }
   let signed = match p.take().text {
     "+" => false
@@ -435,7 +441,7 @@ fn preserve_statement(
     )
   }
   let mut end_offset = head.end_offset
-  while p.peek().text != "\n" && p.peek().text != "" {
+  while p.peek().text != "\n" && (p.peek().text != "" || p.peek().quoted) {
     let t = p.take()
     end_offset = t.end_offset
     if t.text == ";" && !t.quoted {
