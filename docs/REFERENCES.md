@@ -7,7 +7,7 @@ sources describe publicly documented behavior rather than an invented full stand
 |---|---|
 | https://kvaser.com/canlib-webhelp/group__kvadb__signals.htm | DBC sawtooth numbering and Motorola MSB start |
 | https://www.csselectronics.com/pages/can-dbc-file-database-intro | Message/signal fields, scaling, bit-31 extended IDs |
-| https://www.csselectronics.com/pages/can-fd-flexible-data-rate | Public CAN FD payload/transport context |
+| https://www.csselectronics.com/pages/can-fd-flexible-data-rate-intro | Public CAN FD payload/transport context |
 | https://docs.moonbitlang.com/en/latest/toolchain/moon/package.html | Current MoonBit project/package configuration |
 | https://docs.moonbitlang.com/en/latest/language/fundamentals.html | Language/error handling context |
 | Local toolchain D:/Moonbit/lib/core | Actual current String, numeric, bit, env, UTF-8 and bench APIs |
