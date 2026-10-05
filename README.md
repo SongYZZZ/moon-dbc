@@ -28,8 +28,9 @@ Message: EngineData (DBC ID 291)
 EngineSpeed: raw=12000 value=1500 rpm
 Gear: raw=3 value=3  (Drive)
 
-> .\dist\moon-dbc.exe diff tests/fixtures/basic.dbc tests/fixtures/basic.dbc
-Semantic changes: 0
+> .\dist\moon-dbc.exe diff tests/fixtures/basic.dbc tests/fixtures/revised.dbc
+Semantic changes: 1
+EngineData.EngineSpeed.factor: 0.125 -> 0.25
 ```
 
 ## 用途
@@ -126,7 +127,7 @@ moon run examples/multiplex
 .\dist\moon-dbc.exe encode tests/fixtures/basic.dbc 0x123 EngineSpeed=1500 Gear=3
 .\dist\moon-dbc.exe encode tests/fixtures/basic.dbc 0x123 --raw EngineSpeed=12000 Gear=3
 .\dist\moon-dbc.exe layout tests/fixtures/multiplex.dbc 293
-.\dist\moon-dbc.exe diff tests/fixtures/basic.dbc tests/fixtures/basic.dbc
+.\dist\moon-dbc.exe diff tests/fixtures/basic.dbc tests/fixtures/revised.dbc
 .\dist\moon-dbc.exe normalize tests/fixtures/attributes.dbc
 ```
 
@@ -168,7 +169,7 @@ always-active 信号，并产生 warning；编码拒绝 inactive、unknown、重
 
 187 个非重复 MoonBit 测试已通过默认 wasm-gc；native、JS 同样执行验证。
 固定种子测试另外执行 1536 个 raw round-trip，不把这些循环伪装成独立 test 数。
-37 个 cantools 44.1.0 交叉验证向量通过；13 个实际 CLI smoke 用例通过。
+37 个 cantools 44.1.0 交叉验证向量通过；15 个实际 CLI smoke 用例通过。
 
 ```powershell
 moon check --deny-warn

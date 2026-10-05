@@ -17,9 +17,11 @@ interop-results.json. Oracle-generated Motorola vectors include signed extrema
 and zero/positive/negative values. Two unrelated implementations must agree.
 No oracle library is linked into MoonDBC.
 
-Real CLI smoke: scripts/smoke.ps1 executes 13 cases including positive paths,
+Real CLI smoke: scripts/smoke.ps1 executes 15 cases including positive paths,
 invalid layout status 1, bad hex status 2 and missing file status 2. All file fixture
-tests use original small databases. Default/JS/native CLI runs have been executed.
+tests use original small databases. Label encode and a changed factor diff also
+assert exact output; changed semantic diff must return status 1.
+Default/JS/native CLI runs have been executed.
 
 Quality commands: moon fmt --check, moon check --deny-warn, moon test --deny-warn,
 moon info, moon build, moon build --target native --release cmd/main, moon package.

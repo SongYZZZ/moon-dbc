@@ -7,7 +7,7 @@
 本地：`D:\Moonbit\projects\moon-dbc`。目标仓库：
 [SongYZZZ/moon-dbc](https://github.com/SongYZZZ/moon-dbc)。Apache-2.0。
 MoonDBC 为独立编写的 MoonBit 实现；未复制生态 DBC 项目代码。
-GitHub API 已核实当前身份为 SongYZZZ；远程推送与 CI 状态将在完成后更新。
+GitHub API 已核实当前身份为 SongYZZZ；公开仓库已创建并推送，默认分支为 main。
 
 ## MoonBit Toolchain
 
@@ -101,8 +101,9 @@ oracle 策略与覆盖边界见 [COMPATIBILITY](COMPATIBILITY.md)。
 
 ## CLI Smoke Tests
 
-`scripts/smoke.ps1`：13/13 通过。包含全部七个命令、raw encode、JSON decode、
+`scripts/smoke.ps1`：15/15 通过。包含全部七个命令、raw encode、JSON decode、
 message inspect，以及 overlap（exit 1）、奇数 hex（exit 2）、缺失文件（exit 2）。
+Label encode 与真实 factor 修订 diff 检查精确输出；有差异时确认为 exit 1。
 
 ## Benchmark
 
@@ -114,14 +115,20 @@ message inspect，以及 overlap（exit 1）、奇数 hex（exit 2）、缺失�
 
 ## CI
 
-GitHub Actions 已配置 Ubuntu 的 format/check/build、三个后端测试、examples
-与六项 CLI。远程 run 尚未观测；推送后会以真实运行结果更新本节。
+GitHub Actions 已在 Ubuntu **实际全部通过**：format/check/build、三个后端
+各 187 个测试、两个 examples 与六项 CLI。
+[成功 run 37299586605](https://github.com/SongYZZZ/moon-dbc/actions/runs/37299586605)
+对应 cc91a141133ddcb7104d873deec073878f6f5f44；后续验收文档与 CLI fixture
+更新未修改 MoonBit 源码。CI 固定 compiler/core 为 0.10.9+6e6c44045，并初始化 registry。
+首次 run 因 latest formatter 与本地格式版本不同失败；第二次因 clean runner
+没有 registry 失败。这两项均已修复，未跳过格式或测试检查。
 
 ## Git
 
-已按功能连续创建 12 个有意义的提交；最终验收与远程验证会追加提交。
-当前最近提交：c504f7d 文档；3d4d194 语法与 stderr 修复；fee4f22 独立互操作、
-examples、benchmarks。最终提交数量与推送结果将在远程验证后更新。
+截至本报告提交，按功能连续创建 **16 个有意义的提交**，已推送到指定 owner。
+最近的前置提交：cc91a14 初始化 registry；69e48ca 固定 compiler/core；
+a591d9a 三后端验收与空模板清理；c504f7d 文档。最后的验收提交记录 remote CI
+与实际 changed-factor/label CLI 检查。未 squash，未伪造历史。
 
 ## Mooncakes
 
@@ -147,5 +154,5 @@ Wasm CLI 的错误输出走 stdout。互操作测试仅覆盖所列 fixture 与�
 ## Remaining Work
 
 在 SongYZZZ 的 Mooncakes 会话中重新登录后才能发布 0.1.0。
-GitHub 推送与远程 CI 仍待执行。后续版本可扩展 mux 和有边界的流式读取；
+GitHub 推送及远程 CI 已完成。后续版本可扩展 mux 和有边界的流式读取；
 这些扩展未包含在当前兼容性声明中。
